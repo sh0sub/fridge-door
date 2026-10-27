@@ -10,7 +10,31 @@ Built for the UGREEN Hackathon 2026 on AI NAS (Round 1 deadline 2026-11-16 KST).
 
 ## Status
 
-Planning done, implementation starting 2026-10-26. See the plan report for scope, user flows and mockups.
+Skill package v0.7 drafted (2026-10-27): `fridge-door/SKILL.md` plus four references. Passes the local static check with 0 errors and 0 warnings. Not yet run on a NAS (Round 2).
+
+## Layout
+
+| Path | What |
+|---|---|
+| `fridge-door/` | The Skill package (goes into the ZIP as-is): `SKILL.md`, `references/` |
+| `scripts/check.py` | Static checker: Python port of uliya-skill-kit 0.7.3 `check-lib.mjs` plus the plan.md checklist rules |
+| `scripts/build_zip.py` | Builds `dist/fridge-door.zip` after a clean check, verifies size and file limits |
+| `scripts/dryrun.py` | Dry run of the workflow against simulated expert answers |
+| `tests/fixtures/dryrun/` | Simulated expert answers: flow A, test kit batch A (notices), batch B (drawings) |
+| `docs/plan.md` | Plan |
+
+## Development
+
+```
+python3 -m venv .venv && .venv/bin/pip install pytest ruff mypy
+.venv/bin/pytest                                   # unit + integration tests
+.venv/bin/ruff check . && .venv/bin/mypy           # lint, typecheck
+.venv/bin/python scripts/check.py fridge-door --summary
+.venv/bin/python -m scripts.build_zip              # dist/fridge-door.zip
+.venv/bin/python -m scripts.dryrun tests/fixtures/dryrun/flow-a.json
+```
+
+The official checker is `node uliya-skill-kit/scripts/check-skill.mjs fridge-door` from the kit download; run it as well before submitting.
 
 ## License
 

@@ -1,0 +1,25 @@
+[project]
+name = "fridge-door-tools"
+version = "0.1.0"
+description = "Checker and dry-run harness for the fridge-door Uliya Skill (the Skill itself is fridge-door/)"
+requires-python = ">=3.11"
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "mypy"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 160
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E741"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["scripts", "tests"]
