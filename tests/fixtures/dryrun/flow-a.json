@@ -1,0 +1,98 @@
+{
+  "name": "flow-a: weekly digest (plan.md §06 flow A)",
+  "note": "Simulated expert answers. Names, school and amounts are invented. Answer shapes are assumptions (미확인: 실호출로 확인 필요).",
+  "today": "2026-10-26",
+  "inputs": {
+    "source_folder": "Photos/PhoneBackup",
+    "period": "2026-10-19 to 2026-10-25",
+    "children": [
+      {"name": "Mina", "signs_as": ["김민아"]},
+      {"name": "Jun", "signs_as": ["이준"]}
+    ],
+    "parent_language": "ko",
+    "output_folder": "Photos/PhoneBackup/Fridge Door"
+  },
+  "user": {
+    "proceed": true,
+    "approve_preview": true,
+    "child_choice": {"IMG_0107.jpg": "Mina"}
+  },
+  "approvals": {},
+  "experts": {
+    "list_photos": {"status": "completed", "result": {"total": 9, "files": [
+      {"path": "Photos/PhoneBackup/2026-10/IMG_0108.jpg", "size": 812345, "mtime": "2026-10-25T18:02:00"},
+      {"path": "Photos/PhoneBackup/2026-10/IMG_0107.jpg", "size": 1534001, "mtime": "2026-10-24T19:40:00"},
+      {"path": "Photos/PhoneBackup/2026-10/IMG_0106.jpg", "size": 1488123, "mtime": "2026-10-24T19:39:00"},
+      {"path": "Photos/PhoneBackup/2026-10/IMG_0105.jpg", "size": 990210, "mtime": "2026-10-23T08:10:00"},
+      {"path": "Photos/PhoneBackup/2026-10/IMG_0104.jpg", "size": 1002001, "mtime": "2026-10-22T08:05:00"},
+      {"path": "Photos/PhoneBackup/2026-10/IMG_0103.jpg", "size": 978222, "mtime": "2026-10-21T08:01:00"},
+      {"path": "Photos/PhoneBackup/2026-10/IMG_0102.jpg", "size": 1011111, "mtime": "2026-10-21T07:58:00"},
+      {"path": "Photos/PhoneBackup/2026-10/IMG_0101.jpg", "size": 960000, "mtime": "2026-10-20T07:50:00"},
+      {"path": "Photos/PhoneBackup/2026-10/IMG_0100.jpg", "size": 955000, "mtime": "2026-10-19T07:45:00"}
+    ]}},
+    "list_photos_fallback": {"status": "failed", "result": {"reason": "not used in this scenario"}},
+    "tag_lookup": {"status": "completed", "result": {"tagged": [
+      "Photos/PhoneBackup/2026-10/IMG_0100.jpg",
+      "Photos/PhoneBackup/2026-10/IMG_0101.jpg"
+    ]}},
+    "ocr": {
+      "IMG_0102.jpg": {"status": "completed", "result": {"text": "하늘초등학교 가정통신문\n2학년 3반 학부모님께\n국립박물관 현장체험학습을 실시합니다.\n현장체험학습 참가 동의서를 11월 1일까지 회신해 주세요.\n담임 드림"}},
+      "IMG_0103.jpg": {"status": "completed", "result": {"text": "하늘초등학교 1학년 2반 알림장\n11월 4일 체육 시간 준비물: 줄넘기\n이름을 꼭 적어 보내 주세요."}},
+      "IMG_0104.jpg": {"status": "completed", "result": {"text": "하늘초등학교 가정통신문\n현장체험학습비 안내\n현장체험학습비 12,000원을 10월 31일까지 납부해 주세요.\n스쿨뱅킹 계좌로 자동 출금됩니다."}},
+      "IMG_0105.jpg": {"status": "completed", "result": {"text": "하늘초등학교 가정통신문\n학예회 안내\n11월 7일 오후 2시 강당에서 학예회를 엽니다.\n학부모님의 많은 참석 바랍니다."}},
+      "IMG_0106.jpg": {"status": "completed", "result": {"text": "김민아"}},
+      "IMG_0107.jpg": {"status": "completed", "result": {"text": ""}},
+      "IMG_0108.jpg": {"status": "completed", "result": {"text": "튼튼문구\n색종이 2,000\n크레파스 6,500\n합계 8,500\n카드 결제 승인"}}
+    },
+    "vlm": {
+      "IMG_0106.jpg": {"status": "completed", "result": {"answer": "YES. A crayon drawing of a yellow school bus under a rainbow."}},
+      "IMG_0107.jpg": {"status": "completed", "result": {"answer": "YES. A paper-cup robot craft, silver and red."}}
+    },
+    "condense": {"status": "failed", "result": {"reason": "not used in this scenario"}},
+    "translate": {"status": "failed", "result": {"reason": "not used in this scenario"}},
+    "figure_lookup": {"status": "completed", "result": {"matches": {}, "note": "no named people album matches"}},
+    "previous_digest": {"status": "completed", "result": {"text": ""}},
+    "album_lookup": {"status": "completed", "result": {"albums": []}},
+    "create_album": {
+      "School notices 2026-10": {"status": "waiting_approval", "then": {"status": "completed", "result": {"album_id": "a1f0c2d4-0001", "count": 4}}},
+      "Artwork – Mina 2026": {"status": "waiting_approval", "then": {"status": "completed", "result": {"album_id": "a1f0c2d4-0002", "count": 2}}}
+    },
+    "create_album_fallback": {"status": "failed", "result": {"reason": "not used in this scenario"}},
+    "save_digest": {"status": "completed", "result": {"path": "Photos/PhoneBackup/Fridge Door/Fridge Door – 2026-10-19 to 2026-10-25.md", "verified": true}},
+    "tag_add": {"status": "completed"},
+    "archive": {"status": "failed", "result": {"reason": "not used in this scenario"}}
+  },
+  "parent_llm": {
+    "unrelated_reason": {"IMG_0108.jpg": "receipt"},
+    "notices": {
+      "IMG_0102.jpg": {
+        "title": "Museum field trip consent", "sender": "하늘초등학교 2학년 3반", "type": "Reply slip",
+        "dates": [{"role": "due", "quoted": "11월 1일까지 회신", "date": "2026-11-01"}],
+        "action": "Sign and return the consent slip", "amount": null, "child": "Mina", "language": "ko",
+        "key_line": "현장체험학습 참가 동의서를 11월 1일까지 회신해 주세요.",
+        "summary": "박물관 현장체험학습 참가 동의서를 11월 1일까지 회신."
+      },
+      "IMG_0103.jpg": {
+        "title": "PE item to bring", "sender": "하늘초등학교 1학년 2반", "type": "Item to bring",
+        "dates": [{"role": "due", "quoted": "11월 4일 체육 시간 준비물: 줄넘기", "date": "2026-11-04"}],
+        "action": "Pack a jump rope for PE", "amount": null, "child": "Jun", "language": "ko",
+        "key_line": "11월 4일 체육 시간 준비물: 줄넘기",
+        "summary": "11월 4일 체육 시간에 줄넘기 준비."
+      },
+      "IMG_0104.jpg": {
+        "title": "Field-trip fee", "sender": "하늘초등학교", "type": "Payment",
+        "dates": [{"role": "payment", "quoted": "10월 31일까지 납부", "date": "2026-10-31"}],
+        "action": "field-trip fee", "amount": "KRW 12,000", "child": "Mina", "language": "ko",
+        "key_line": "현장체험학습비 12,000원을 10월 31일까지 납부해 주세요.",
+        "summary": "현장체험학습비 12,000원, 10월 31일까지 납부."
+      },
+      "IMG_0105.jpg": {
+        "title": "School arts festival", "sender": "하늘초등학교", "type": "Event",
+        "dates": [{"role": "event", "quoted": "11월 7일 오후 2시 학예회", "date": "2026-11-07 14:00"}],
+        "action": "Attend the arts festival (optional)", "amount": null, "child": null, "language": "ko",
+        "key_line": "11월 7일 오후 2시 강당에서 학예회를 엽니다.",
+        "summary": "11월 7일 오후 2시 강당에서 학예회."
+      }
+    }
+  }
+}

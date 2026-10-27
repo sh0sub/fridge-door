@@ -1,0 +1,94 @@
+{
+  "name": "testkit batch A: 8 notices (5 ko, 3 en, 1 past) + receipt + screenshot (Round 2 Core 1)",
+  "note": "Simulated expert answers for the planned test kit (#28). Replace the OCR texts with real device output once the photos exist. All names, schools and numbers are invented.",
+  "today": "2026-11-28",
+  "inputs": {
+    "source_folder": "Photos/PhoneBackup/Kit-A",
+    "period": "2026-11-22 to 2026-11-28",
+    "children": [
+      {"name": "Mina", "signs_as": ["김민아"]},
+      {"name": "Jun", "signs_as": ["이준"]}
+    ],
+    "parent_language": "ko",
+    "output_folder": "Photos/PhoneBackup/Fridge Door"
+  },
+  "user": {"proceed": true, "approve_preview": true},
+  "approvals": {},
+  "experts": {
+    "list_photos": {"status": "completed", "result": {"total": 10, "files": [
+      {"path": "Photos/PhoneBackup/Kit-A/KIT_N01.jpg"}, {"path": "Photos/PhoneBackup/Kit-A/KIT_N02.jpg"},
+      {"path": "Photos/PhoneBackup/Kit-A/KIT_N03.jpg"}, {"path": "Photos/PhoneBackup/Kit-A/KIT_N04.jpg"},
+      {"path": "Photos/PhoneBackup/Kit-A/KIT_N05.jpg"}, {"path": "Photos/PhoneBackup/Kit-A/KIT_N06.jpg"},
+      {"path": "Photos/PhoneBackup/Kit-A/KIT_N07.jpg"}, {"path": "Photos/PhoneBackup/Kit-A/KIT_N08.jpg"},
+      {"path": "Photos/PhoneBackup/Kit-A/KIT_R01.jpg"}, {"path": "Photos/PhoneBackup/Kit-A/KIT_S01.jpg"}
+    ]}},
+    "list_photos_fallback": {"status": "failed", "result": {"reason": "not used"}},
+    "tag_lookup": {"status": "completed", "result": {"tagged": []}},
+    "ocr": {
+      "KIT_N01.jpg": {"status": "completed", "result": {"text": "하늘초등학교 가정통신문\n2학년 3반 학부모님께\n겨울 체험학습 참가 동의서를 12월 2일까지 회신해 주세요.\n담임 드림"}},
+      "KIT_N02.jpg": {"status": "completed", "result": {"text": "하늘초등학교 가정통신문\n우유 급식비 안내\n12월분 우유 급식비 15,000원을 12월 4일까지 납부해 주세요."}},
+      "KIT_N03.jpg": {"status": "completed", "result": {"text": "하늘초등학교 1학년 2반 알림장\n12월 1일 음악 시간 준비물: 리코더\n이름표를 붙여 주세요."}},
+      "KIT_N04.jpg": {"status": "completed", "result": {"text": "하늘초등학교 가정통신문\n학부모 상담 주간 안내\n12월 8일부터 12일까지 상담 주간을 운영합니다.\n희망 시간은 담임 선생님께 알려 주세요."}},
+      "KIT_N05.jpg": {"status": "completed", "result": {"text": "하늘초등학교 2학년 3반 알림장\n독서 기록장을 11월 20일까지 제출해 주세요.\n담임 드림"}},
+      "KIT_N06.jpg": {"status": "completed", "result": {"text": "Sunny Hill International School\nGrade 2 Parents\nWinter concert on December 10 at 6 pm in the main hall.\nAll families are welcome."}},
+      "KIT_N07.jpg": {"status": "completed", "result": {"text": "Sunny Hill International School Library\nDear parents of Class 1B,\nPlease return the borrowed library book by December 3.\nThank you."}},
+      "KIT_N08.jpg": {"status": "completed", "result": {"text": "Sunny Hill International School\nNotice to parents\nThe school will be closed on December 5 for teacher training.\nNo classes that day."}},
+      "KIT_R01.jpg": {"status": "completed", "result": {"text": "행복마트\n우유 2,400\n식빵 3,200\n합계 5,600\n현금 결제"}},
+      "KIT_S01.jpg": {"status": "completed", "result": {"text": "오후 3:12\n배터리 82%\n지도 앱 길찾기\n도착까지 15분\n경로 안내 시작"}}
+    },
+    "vlm": {},
+    "condense": {"status": "failed", "result": {"reason": "not used"}},
+    "translate": {
+      "KIT_N06.jpg": {"status": "completed", "result": {"text": "12월 10일 오후 6시 본관에서 겨울 음악회."}},
+      "KIT_N07.jpg": {"status": "waiting_approval", "then": {"status": "completed", "result": {"text": "빌린 도서관 책을 12월 3일까지 반납."}}},
+      "KIT_N08.jpg": {"status": "completed", "result": {"text": "교사 연수로 12월 5일 휴교."}}
+    },
+    "figure_lookup": {"status": "completed", "result": {"matches": {}}},
+    "previous_digest": {"status": "completed", "result": {"text": ""}},
+    "album_lookup": {"status": "completed", "result": {"albums": []}},
+    "create_album": {
+      "School notices 2026-11": {"status": "waiting_approval", "then": {"status": "completed", "result": {"album_id": "kit-a-0001", "count": 8}}}
+    },
+    "create_album_fallback": {"status": "failed", "result": {"reason": "not used"}},
+    "save_digest": {"status": "waiting_approval", "then": {"status": "completed", "result": {"path": "Photos/PhoneBackup/Fridge Door/Fridge Door – 2026-11-22 to 2026-11-28.md", "verified": true}}},
+    "tag_add": {"status": "completed"},
+    "archive": {"status": "failed", "result": {"reason": "not used"}}
+  },
+  "parent_llm": {
+    "unrelated_reason": {"KIT_R01.jpg": "receipt", "KIT_S01.jpg": "screenshot"},
+    "notices": {
+      "KIT_N01.jpg": {"title": "Winter trip consent", "sender": "하늘초등학교 2학년 3반", "type": "Reply slip",
+        "dates": [{"role": "due", "quoted": "12월 2일까지 회신", "date": "2026-12-02"}],
+        "action": "Return the winter trip consent slip", "amount": null, "child": "Mina", "language": "ko",
+        "key_line": "겨울 체험학습 참가 동의서를 12월 2일까지 회신해 주세요.", "summary": "겨울 체험학습 동의서 12월 2일까지 회신."},
+      "KIT_N02.jpg": {"title": "Milk fee", "sender": "하늘초등학교", "type": "Payment",
+        "dates": [{"role": "payment", "quoted": "12월 4일까지 납부", "date": "2026-12-04"}],
+        "action": "Pay the milk fee KRW 15,000", "amount": "KRW 15,000", "child": null, "language": "ko",
+        "key_line": "12월분 우유 급식비 15,000원을 12월 4일까지 납부해 주세요.", "summary": "우유 급식비 15,000원 12월 4일까지 납부."},
+      "KIT_N03.jpg": {"title": "Recorder for music", "sender": "하늘초등학교 1학년 2반", "type": "Item to bring",
+        "dates": [{"role": "due", "quoted": "12월 1일 음악 시간 준비물", "date": "2026-12-01"}],
+        "action": "Pack the recorder", "amount": null, "child": "Jun", "language": "ko",
+        "key_line": "12월 1일 음악 시간 준비물: 리코더", "summary": "12월 1일 음악 시간에 리코더 준비."},
+      "KIT_N04.jpg": {"title": "Parent meeting week", "sender": "하늘초등학교", "type": "Event",
+        "dates": [{"role": "event", "quoted": "12월 8일부터 12일까지", "date": "2026-12-08"}],
+        "action": "Tell the teacher a preferred time", "amount": null, "child": null, "language": "ko",
+        "key_line": "12월 8일부터 12일까지 상담 주간을 운영합니다.", "summary": "12월 8일부터 12일까지 학부모 상담 주간."},
+      "KIT_N05.jpg": {"title": "Reading log", "sender": "하늘초등학교 2학년 3반", "type": "Reply slip",
+        "dates": [{"role": "due", "quoted": "11월 20일까지 제출", "date": "2026-11-20"}],
+        "action": "Hand in the reading log", "amount": null, "child": "Mina", "language": "ko",
+        "key_line": "독서 기록장을 11월 20일까지 제출해 주세요.", "summary": "독서 기록장 11월 20일까지 제출."},
+      "KIT_N06.jpg": {"title": "Winter concert", "sender": "Sunny Hill International School, Grade 2", "type": "Event",
+        "dates": [{"role": "event", "quoted": "December 10 at 6 pm", "date": "2026-12-10 18:00"}],
+        "action": "Attend the winter concert (optional)", "amount": null, "child": null, "language": "en",
+        "key_line": "Winter concert on December 10 at 6 pm in the main hall.", "summary": "Winter concert, Dec 10, 6 pm, main hall."},
+      "KIT_N07.jpg": {"title": "Library book", "sender": "Sunny Hill International School Library, Class 1B", "type": "Reply slip",
+        "dates": [{"role": "due", "quoted": "by December 3", "date": "2026-12-03"}],
+        "action": "Return the library book", "amount": null, "child": "Jun", "language": "en",
+        "key_line": "Please return the borrowed library book by December 3.", "summary": "Return the borrowed library book by Dec 3."},
+      "KIT_N08.jpg": {"title": "School closed", "sender": "Sunny Hill International School", "type": "Event",
+        "dates": [{"role": "event", "quoted": "December 5", "date": "2026-12-05"}],
+        "action": "No school that day", "amount": null, "child": null, "language": "en",
+        "key_line": "The school will be closed on December 5 for teacher training.", "summary": "School closed Dec 5 (teacher training)."}
+    }
+  }
+}
