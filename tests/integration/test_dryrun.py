@@ -372,7 +372,7 @@ def test_s4_open_items_carried_over() -> None:
 def test_testkit_core1_notices() -> None:
     out = run_fixture(load("testkit-a"))
     assert out.status == "completed"
-    assert out.report.startswith("5 deadlines (1 past)") and ", 3 events," in out.report
+    assert out.report.startswith("6 deadlines (1 past)") and ", 2 events," in out.report
     assert [a["name"] for a in out.albums] == ["School notices 2026-11"] and len(out.albums[0]["paths"]) == 8
     assert len(out.calls_for("translate")) == 4  # 3 English notices; one waited for approval
     assert sorted(u["reason"] for u in out.unrelated) == ["receipt", "screenshot"]
