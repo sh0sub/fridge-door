@@ -27,7 +27,7 @@ Upload the kit into Photos/PhoneBackup in two batches so that one run never hold
 ## Core 1: notices become a digest
 
 - [ ] Fridge Door reads back folder, period, children and output folder and waits for a yes.
-- [ ] The preview lists five deadlines in date order, one flagged as past, plus events; each item names its source photo.
+- [ ] The preview lists six deadlines in date order, one flagged as past, plus two events; each item names its source photo.
 - [ ] The receipt and the screenshot are listed as left untouched.
 - [ ] After approval: "School notices {year-month}" album holds the 8 notices; one digest file is saved; its real path is reported.
 - [ ] The digest has the seven sections of [digest-format.md](digest-format.md) in order.
@@ -51,7 +51,7 @@ Upload the kit into Photos/PhoneBackup in two batches so that one run never hold
 
 | Run | Photos in | Expected deadlines | Expected albums | Left untouched | Needs your check |
 |---|---|---|---|---|---|
-| Core 1 (batch A) | 10 | 5 (1 past) and events from the other notices | School notices {year-month} (8) | receipt, screenshot | none |
+| Core 1 (batch A) | 10 | 6 (1 past) and 2 events | School notices {year-month} (8) | receipt, screenshot | none |
 | Core 2 (batch B) | 6 | 0 | Artwork – {child} {year} for each of 2 children (5 in total) | none | blurred drawing |
 | Second run | same periods | none | none | none | none, everything already done |
 
