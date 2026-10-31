@@ -88,3 +88,33 @@ Re-run: pytest 122 passed, ruff and mypy clean, `scripts/check.py fridge-door` 0
 | C3-S1-gallery | mockup S1 | Preview card sample consistent | gap (low) | gallery/00-chat.png says "Artwork (2)" but lists only IMG_0106; IMG_0107 appears only in the warning, unlike README sample and dry-run output (both list both items) |
 | C3-zip-size | 09 / Devpost | ZIP size stated correctly | fixed (Round 3) | devpost.md:36 and checklist.md:18 now say 15,854 bytes (stat dist/fridge-door.zip = 15,854); checklist max file size corrected to 20,074 bytes (SKILL.md) |
 | C3-S1-warn-render | mockup S1 | Low-OCR warning shown in a real run | match (spec) | flow-a dry run prints no warning (name read from the drawing); warning rendered in testkit-b and gallery |
+
+## Round 4 audit (2026-11-01, independent, full conformance)
+
+Re-run: pytest 122 passed, ruff and mypy clean, `scripts/check.py fridge-door` 0 error 0 warning, dry run flow-a completed (20 delegations listed, 2 waiting_approval then completed, digest printed), dist ZIP extracted and diffed against fridge-door/ (identical), git tree clean. Gallery 00-chat.png re-viewed against mockups S1/S2.
+
+| id | artifact section | expected | status | evidence |
+|---|---|---|---|---|
+| R4-S1 | mockup S1 | Preview card: 9/2/7 strip, warning, grouped lists, Will create/save, Proceed | match | 00-chat.png left card |
+| R4-S2 | mockup S2 | Completion card: Next due, real ids, tag line, grey status | match | 00-chat.png right card |
+| R4-S3 | mockup S3 | Digest with source files, checkboxes, meta line | match | dryrun delegation 20 text |
+| R4-flow | 06 flows A/B/C | Full flows runnable via dry run | match | flow-a, testkit-a, testkit-b |
+| R4-gallery-artwork | mockup S1 | Gallery card: Artwork (2) lists both items | gap (low) | 00-chat.png and 00-chat.html:45 show "Artwork (2)" with only IMG_0106; IMG_0107 only in the warning. Still open from Round 3 |
+| R4-S4/S5sign/S6/official | S4, S5, S6, 09 | Real NAS screens, signature, video, official checker | blocked | real NAS Round 2, user input, kit not installed |
+| R4-win-real | criteria AI NAS Fit | Judge sees real-NAS run | blocked | dry-run only until Round 2 device |
+
+## Round 4 confirmation pass (2026-11-01, independent)
+
+Re-run: pytest 122 passed, ruff and mypy clean, `scripts/check.py fridge-door` static-pass (0 error 0 warning), dist ZIP extracted and diffed (identical, 15,854 bytes), proposal 489 words, flow-a dry run Preview/Progress/Digest/tag step re-read.
+
+| id | artifact section | expected | status | evidence |
+|---|---|---|---|---|
+| R4C-gallery | mockup S1 / 09 gallery | First gallery image shows a consistent preview card | gap (medium) | gallery/00-chat.png and 00-chat.html:45-47: header "Artwork (2)" but only IMG_0106 listed (IMG_0107 missing); header merges "Not related (1)" on the same line; "Will save" line omits the "tag handled photos" clause the dry run prints. Dry run and README list both artworks. Open since Round 3, first image a judge sees |
+| R4C-all | 05, 06, S1-S3, S5, 09 | everything else | match | see Round 4 table above |
+| R4C-blocked | S4 image, S5 signature, S6, official checker, real-NAS run | n/a | blocked | real NAS Round 2, user input, kit not installed |
+
+## Round 4 fix (2026-11-01)
+
+| id | artifact section | expected | status | evidence |
+|---|---|---|---|---|
+| S1-gallery-artwork-list | mockup S1 / 09 gallery | Gallery preview card matches dry run and README: Artwork (2) lists IMG_0107 and IMG_0106, separate Not related group, Will save includes tag clause | fixed (Round 4) | gallery/00-chat.html and regenerated 00-chat.png; test_gallery_preview_card_lists_every_counted_artwork. Supersedes C3-S1-gallery, R4-gallery-artwork, R4C-gallery |

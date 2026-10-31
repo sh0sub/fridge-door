@@ -88,3 +88,15 @@ def test_s4_checked_items_are_done() -> None:
     part = subsection("Carry over open items")
     assert "(`- [ ]`)" in part and "`- [x]` count as done" in part and '"carried over"' in part
     assert "An empty result means there is nothing to carry over" in part
+
+
+def test_gallery_preview_card_lists_every_counted_artwork() -> None:
+    import re
+    from pathlib import Path
+
+    html = (Path(__file__).resolve().parent.parent / "docs/submission/gallery/00-chat.html").read_text()
+    card = html.split("2 &middot; COMPLETION")[0]
+    block = card.split("Artwork (2)")[1].split("Not related")[0]
+    assert len(re.findall(r"IMG_\d{4}\.jpg", block)) == 2
+    assert "Not related / unreadable (1)</div>" in card
+    assert "tag handled photos" in card
