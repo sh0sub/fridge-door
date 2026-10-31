@@ -38,6 +38,43 @@ Original photos are never renamed or deleted. Nothing is sent outside the NAS.
 - "애들 그림 아이별 앨범으로 정리해 줘."
 - "지난 2주 동안 찍은 가정통신문에서 마감만 뽑아 줘."
 
+## What you see in the chat
+
+While photos are read, one progress line updates ("Reading photos 4/7"). Then you get the preview card. Nothing is created until you answer yes.
+
+    7 photos read. Please check before I save anything.
+    9 photos found · 2 already done · 7 to process
+    Photos/PhoneBackup · 2026-10-19 to 2026-10-25
+
+    School notices (4)
+    - IMG_0104.jpg · Field-trip fee · 2026-10-31 · field-trip fee, KRW 12,000 · Mina
+    - IMG_0102.jpg · Museum field trip consent · 2026-11-01 · Sign and return the consent slip · Mina
+    - IMG_0103.jpg · PE item to bring · 2026-11-04 · Pack a jump rope for PE · Jun
+    - IMG_0105.jpg · School arts festival · 2026-11-07 14:00 · Attend the arts festival (optional) · all children
+
+    Artwork (2)
+    - IMG_0107.jpg · Mina · A paper-cup robot craft, silver and red.
+    - IMG_0106.jpg · Mina · A crayon drawing of a yellow school bus under a rainbow.
+
+    Not related / unreadable (1)
+    - IMG_0108.jpg · receipt · left untouched
+
+    Will create: album School notices 2026-10 (4), album Artwork – Mina 2026 (2)
+    Will save: Fridge Door – 2026-10-19 to 2026-10-25.md in Photos/PhoneBackup/Fridge Door · tag handled photos fridge-door-done
+    Nothing will be moved or deleted.
+    Proceed? (yes / or correct, e.g. 'IMG_4410 is Jun's')
+
+After you agree and the NAS approves each step, the completion card shows only what was really created, with the identifiers and path the NAS returned:
+
+    Done. 3 deadlines, 1 event, 2 artworks.
+    Next due: 2026-10-31 · field-trip fee · KRW 12,000 · Mina · IMG_0104.jpg
+    Created:
+    - Album 'School notices 2026-10' · 4 photos · id a1f0c2d4-0001
+    - Album 'Artwork – Mina 2026' · 2 photos · id a1f0c2d4-0002
+    - Saved digest · Photos/PhoneBackup/Fridge Door/Fridge Door – 2026-10-19 to 2026-10-25.md
+    - Tagged 6 photos fridge-door-done
+    Skipped 1 (receipt) · 2 already done · Unreadable 0 · Nothing moved or deleted · All processing stayed on this NAS
+
 ## Weekly use
 
 1. Ask once a week; Fridge Door does not run on a schedule by itself.

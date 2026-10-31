@@ -35,6 +35,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SKILL_MD = ROOT / "fridge-door" / "SKILL.md"
 DIGEST_FORMAT = ROOT / "fridge-door" / "references" / "digest-format.md"
 MAX_PHOTOS = 12
+PAST_MARK = "⚠"
 CONDENSE_WORDS = 400
 SCHOOL_MARKERS = ("학교", "가정통신문", "학부모", "담임", "회신", "준비물", "납부", "school", "class", "parents", "teacher", "pta")
 
@@ -101,6 +102,10 @@ class Outcome:
     tagged: list[str] = field(default_factory=list)
     archived: list[str] = field(default_factory=list)
     report: str = ""
+    completion_card: str = ""
+    progress: list[str] = field(default_factory=list)
+    photos_found: int = 0
+    photos_to_process: int = 0
     notices: list[dict[str, Any]] = field(default_factory=list)
     artwork: list[dict[str, Any]] = field(default_factory=list)
     unrelated: list[dict[str, str]] = field(default_factory=list)
@@ -184,6 +189,10 @@ def period_end(period: str) -> date:
     return date.fromisoformat(dates[-1])
 
 
+def is_past(line: str) -> bool:
+    return line.startswith(f"- [ ] {PAST_MARK} ")
+
+
 def plural(n: int, word: str) -> str:
     return f"{n} {word}" + ("" if n == 1 else "s")
 
@@ -209,6 +218,7 @@ class DryRun:
         self.llm: dict[str, Any] = self.fx.get("parent_llm", {})
         self.today = date.fromisoformat(self.fx["today"])
         self.out = Outcome()
+        self.planned_failed: list[dict[str, Any]] = []
 
     # -- delegate with the five states --
     def delegate(self, key: str, item: str, values: dict[str, Any]) -> tuple[str, dict[str, Any]]:
@@ -267,10 +277,12 @@ class DryRun:
         self.step_carry_over()
         albums = self.step_preview()
         self.step_albums(albums)
+        self.planned_failed = [a for a in albums if a.get("status") != "completed"]
         self.step_save()
         self.step_tag()
         self.step_archive()
         self.out.report = self.compose_report()
+        self.out.completion_card = self.render_completion_card()
 
     def step_inputs(self) -> None:
         if not self.inputs.get("source_folder"):
@@ -293,6 +305,7 @@ class DryRun:
         if status == "cancelled":
             raise Stop("cancelled", "Stopped at Step 1. Nothing was created.")
         files: list[dict[str, Any]] = result.get("files", [])
+        self.out.photos_found = len(files)
         total = int(result.get("total", len(files)))
         if total == 0 or not files:
             raise Stop("completed", f"No photos were found in {self.inputs['source_folder']} for {self.inputs['period']} "
@@ -312,6 +325,7 @@ class DryRun:
             self.out.messages.append("Could not check earlier runs; photos handled before may appear again.")
         self.out.already_done = [p for p in paths if p in tagged]
         new = [p for p in paths if p not in tagged]
+        self.out.photos_to_process = len(new)
         if self.out.already_done:
             self.out.messages.append(f"{len(self.out.already_done)} already done")
         if not new:
@@ -323,7 +337,8 @@ class DryRun:
         candidates: list[str] = []
         texts: dict[str, str] = {}
         overrides: dict[str, str] = self.llm.get("classify", {})
-        for path in new:
+        for i, path in enumerate(new, 1):
+            self.out.progress.append(f"Reading photos {i}/{len(new)}")
             status, result = self.delegate("ocr", name_of(path), {"photo_path": path})
             if status == "cancelled":
                 raise Stop("cancelled", "Stopped while reading photos. Nothing was created.")
@@ -526,9 +541,9 @@ class DryRun:
                 if d["role"] not in ("due", "payment"):
                     continue
                 when = d.get("date") or "needs check"
-                flags = " · past" if d.get("past") else ""
+                flag = f"{PAST_MARK} " if d.get("past") else ""
                 child = n.get("child") or "all children"
-                rows.append((when, f"- [ ] {when} — {n['action']} · {child} · \"{d['quoted']}\" · {name_of(n['path'])}{flags}"))
+                rows.append((when, f"- [ ] {flag}{when} — {n['action']} · {child} · \"{d['quoted']}\" · {name_of(n['path'])}"))
         rows.sort(key=lambda r: r[0])
         return rows
 
@@ -550,11 +565,11 @@ class DryRun:
 
     def render_digest(self) -> str:
         deadlines = self.deadlines()
-        past = sum(1 for _, line in deadlines if line.endswith(" · past"))
+        past = sum(1 for _, line in deadlines if is_past(line))
         events = self.events()
         groups = self.artwork_by_child()
         counts = ", ".join(f"{child} {len(items)}" for child, items in groups.items())
-        nxt = next((line for when, line in deadlines if when != "needs check" and not line.endswith(" · past")), None)
+        nxt = next((line for when, line in deadlines if when != "needs check" and not is_past(line)), None)
         albums = ", ".join(f"{a['name']} ({a.get('count', len(a['paths']))} photos)" for a in self.out.albums) or "none created"
         needs = [f"- {name_of(u['path'])}: {u['reason']}" for u in self.out.unreadable]
         needs += [f"- {name_of(n['path'])}: date needs check" for n in self.out.notices if any(d["needs_check"] for d in n.get("dates", []))]
@@ -587,7 +602,9 @@ class DryRun:
         }
         if list(body) != self.sections:
             raise DryRunError(f"digest renderer sections {list(body)} differ from digest-format.md {self.sections}")
-        parts = [f"# Fridge Door – {self.inputs['period']}"]
+        parts = [f"# Fridge Door – {self.inputs['period']}",
+                 f"Source: {self.inputs['source_folder']} · {plural(self.out.photos_to_process, 'photo')} read · "
+                 f"Generated on NAS {self.fx.get('generated_at', self.today.isoformat())}"]
         for title in self.sections:
             parts.append(f"\n## {title}\n" + "\n".join(body[title]))
         return "\n".join(parts) + "\n"
@@ -611,21 +628,81 @@ class DryRun:
             return f"- To be moved after approval: {names} into {self.archive_folder()}"
         return "- Originals were not moved or deleted."
 
+    def notice_line(self, n: dict[str, Any]) -> str:
+        """One preview row: file, title, date, action (with amount), child. Past due dates carry the warning mark."""
+        dates = n.get("dates", [])
+        main = next((d for d in dates if d["role"] != "event"), dates[0] if dates else {})
+        when = main.get("date") or "needs check"
+        if main.get("past"):
+            when = f"{PAST_MARK} {when} (past)"
+        action = n["action"] + (f", {n['amount']}" if n.get("amount") else "")
+        line = f"- {name_of(n['path'])} · {n['title']} · {when} · {action} · {n.get('child') or 'all children'}"
+        if n.get("translated"):
+            first = next((d.get("date") or "needs check" for d in dates), "")
+            line += f"\n  [{n['key_line']} / {n['translated']} / {first} / {n['action']}]"
+        return line
+
     def render_preview(self, albums: list[dict[str, Any]]) -> str:
-        lines = ["Preview (nothing has been created yet):"]
-        lines += [line for _, line in self.deadlines()] + [f"- [ ] {c}" for c in self.out.carried]
-        lines += self.events()
-        for n in self.out.notices:
-            if n.get("translated"):
-                due = next((d.get("date") or "needs check" for d in n.get("dates", [])), "")
-                lines.append(f"[{n['key_line']} / {n['translated']} / {due} / {n['action']}]")
-        for a in self.out.artwork:
-            lines.append(f"Artwork {name_of(a['path'])}: {a['caption']} — {a['child'] or 'which child?'}")
-        lines += [f"Left alone: {name_of(u['path'])} ({u['reason']})" for u in self.out.unrelated]
-        lines += [f"Could not read: {name_of(u['path'])}" for u in self.out.unreadable]
-        lines += [f"Will create album {a['name']} ({len(a['paths'])} photos)" for a in albums]
-        lines.append(f"Will save Fridge Door – {self.inputs['period']}.md in {self.inputs['output_folder']} and tag handled photos.")
-        lines.append("Nothing will be moved or deleted.")
+        """The 7-part preview card of SKILL.md Step 6 (mockup S1). Parts without content are left out."""
+        out = self.out
+        lines = [f"{plural(out.photos_to_process, 'photo')} read. Please check before I save anything.",
+                 f"{plural(out.photos_found, 'photo')} found · {len(out.already_done)} already done · {out.photos_to_process} to process",
+                 f"{self.inputs['source_folder']} · {self.inputs['period']}"]
+        for a in out.artwork:
+            if not a["child"]:
+                lines.append(f"Check needed · {name_of(a['path'])}: I could not tell whose drawing this is. Which child made it?")
+        for u in out.unreadable:
+            lines.append(f"Check needed · {name_of(u['path'])}: could not be read. Please retake the photo if it matters.")
+        if out.notices:
+            lines += ["", f"School notices ({len(out.notices)})"]
+            lines += [self.notice_line(n) for n in sorted(out.notices, key=lambda n: self.first_date(n))]
+        lines += [f"- [ ] {c}" for c in out.carried]
+        if out.artwork:
+            lines += ["", f"Artwork ({len(out.artwork)})"]
+            lines += [f"- {name_of(a['path'])} · {a['child'] or 'unknown, please tell me'} · {a['caption']}" for a in out.artwork]
+        other = [f"- {name_of(u['path'])} · {u['reason']} · left untouched" for u in out.unrelated]
+        other += [f"- {name_of(u['path'])} · could not be read" for u in out.unreadable]
+        if other:
+            lines += ["", f"Not related / unreadable ({len(other)})"] + other
+        made = ", ".join(f"album {a['name']} ({len(a['paths'])})" for a in albums)
+        lines += ["", f"Will create: {made or 'no album'}",
+                  f"Will save: Fridge Door – {self.inputs['period']}.md in {self.inputs['output_folder']} · tag handled photos fridge-door-done",
+                  "Nothing will be moved or deleted.",
+                  "Proceed? (yes / or correct, e.g. 'IMG_4410 is Jun's')"]
+        return "\n".join(lines)
+
+    @staticmethod
+    def first_date(notice: dict[str, Any]) -> str:
+        return next((d.get("date") or "9999" for d in notice.get("dates", [])), "9999")
+
+    def render_completion_card(self) -> str:
+        """The 4-part completion card of SKILL.md Step 11 (mockup S2), built only from real results."""
+        out = self.out
+        deadlines = self.deadline_items()
+        lines = [f"Done. {plural(len(deadlines), 'deadline')}, {plural(len(self.events()), 'event')}, {plural(len(out.artwork), 'artwork')}."]
+        upcoming = [(when, item) for when, item in deadlines if not item["past"]]
+        if upcoming:
+            when, item = upcoming[0]
+            amount = f" · {item['amount']}" if item.get("amount") else ""
+            lines.append(f"Next due: {when} · {item['action']}{amount} · {item['child']} · {item['source']}")
+        lines.append("Created:")
+        for album in out.albums:
+            lines.append(f"- Album '{album['name']}' · {plural(int(album['count']), 'photo')} · id {album['id']}")
+        for album in self.planned_failed:
+            lines.append(f"- Album '{album['name']}' was not created ({album['status']})")
+        if out.saved_path:
+            lines.append(f"- Saved digest · {out.saved_path}")
+        else:
+            lines.append("- Digest was not saved; its text is shown above")
+        if out.tagged:
+            lines.append(f"- Tagged {plural(len(out.tagged), 'photo')} fridge-door-done")
+        status = [f"Skipped {len(out.unrelated)} ({', '.join(u['reason'] for u in out.unrelated)})" if out.unrelated else "Skipped 0"]
+        if out.already_done:
+            status.append(f"{len(out.already_done)} already done")
+        status.append(f"Unreadable {len(out.unreadable)}")
+        status.append(f"Moved {plural(len(out.archived), 'past notice photo')}" if out.archived else "Nothing moved or deleted")
+        status.append("All processing stayed on this NAS")
+        lines.append(" · ".join(status))
         return "\n".join(lines)
 
     def created_so_far(self, prefix: str) -> str:
@@ -634,7 +711,7 @@ class DryRun:
 
     def compose_report(self) -> str:
         deadlines = self.deadlines()
-        past = sum(1 for _, line in deadlines if line.endswith(" · past"))
+        past = sum(1 for _, line in deadlines if is_past(line))
         upcoming = [(when, n) for when, n in self.deadline_items() if not n["past"]]
         groups = self.artwork_by_child()
         parts = [plural(len(deadlines), "deadline") + (f" ({past} past)" if past else "")]
@@ -665,7 +742,8 @@ class DryRun:
         for n in self.out.notices:
             for d in n.get("dates", []):
                 if d["role"] in ("due", "payment") and d.get("date"):
-                    items.append((d["date"], {"action": n["action"], "past": d["past"]}))
+                    items.append((d["date"], {"action": n["action"], "past": d["past"], "amount": n.get("amount"),
+                                              "child": n.get("child") or "all children", "source": name_of(n["path"])}))
         return sorted(items, key=lambda x: x[0])
 
 
@@ -679,9 +757,13 @@ def transcript(outcome: Outcome) -> str:
     lines += ["", "## Questions to the user"] + [f"- {q}" for q in outcome.questions]
     if outcome.preview:
         lines += ["", "## Preview", outcome.preview]
+    if outcome.progress:
+        lines += ["", "## Progress", *outcome.progress]
     if outcome.digest:
         lines += ["", "## Digest", outcome.digest]
     lines += ["", "## Report", outcome.report]
+    if outcome.completion_card:
+        lines += ["", "## Completion card", outcome.completion_card]
     return "\n".join(lines)
 
 

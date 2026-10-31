@@ -1,6 +1,6 @@
 # Devpost page: Fridge Door (paste-ready, English)
 
-Paste each block into the field of the same name. Track: **Bring Memories to Life**. Images: `gallery/thumbnail.png` (1200x800, 3:2), then `gallery/01-flow.png`, `02-digest.png`, `03-delegation.png`, `04-privacy.png` (each 1500x1000).
+Paste each block into the field of the same name. Track: **Bring Memories to Life**. Images: `gallery/thumbnail.png` (1200x800, 3:2), then `gallery/00-chat.png` (chat preview and completion cards), `gallery/01-flow.png`, `02-digest.png`, `03-delegation.png`, `04-privacy.png` (each 1500x1000).
 
 ---
 

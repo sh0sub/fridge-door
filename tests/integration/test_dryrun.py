@@ -377,7 +377,7 @@ def test_testkit_core1_notices() -> None:
     assert len(out.calls_for("translate")) == 4  # 3 English notices; one waited for approval
     assert sorted(u["reason"] for u in out.unrelated) == ["receipt", "screenshot"]
     assert len(out.tagged) == 8
-    assert "KIT_N05.jpg · past" in (out.digest or "")
+    assert "⚠ 2026-" in (out.digest or "") and "KIT_N05.jpg" in (out.digest or "")
 
 
 def test_testkit_core2_drawings() -> None:
@@ -422,3 +422,73 @@ def test_cli_prints_transcript(capsys: pytest.CaptureFixture[str]) -> None:
     assert main([str(FIXTURES / "flow-a.json")]) == 0
     printed = capsys.readouterr().out
     assert printed.startswith("status: completed") and "## Digest" in printed and "## Report" in printed
+
+
+# ---- chat card formats (mockups S1, S2) -------------------------------------
+
+README = Path(__file__).resolve().parent.parent.parent / "fridge-door" / "references" / "README.md"
+
+
+def test_preview_card_has_the_seven_parts_in_order() -> None:
+    preview = run_fixture(flow_a()).preview or ""
+    lines = preview.splitlines()
+    assert lines[0] == "7 photos read. Please check before I save anything."
+    assert lines[1] == "9 photos found · 2 already done · 7 to process"
+    assert lines[2] == "Photos/PhoneBackup · 2026-10-19 to 2026-10-25"
+    order = ["School notices (4)", "Artwork (2)", "Not related / unreadable (1)", "Will create:", "Will save:",
+             "Nothing will be moved or deleted.", "Proceed? (yes / or correct"]
+    positions = [next(i for i, line in enumerate(lines) if line.startswith(t)) for t in order]
+    assert positions == sorted(positions)
+    assert "- IMG_0104.jpg · Field-trip fee · 2026-10-31 · field-trip fee, KRW 12,000 · Mina" in lines
+    assert "Check needed" not in preview  # warning only when something is unclear
+
+
+def test_preview_card_warns_about_unclear_child_and_flags_past_due() -> None:
+    fx = flow_a()
+    fx["user"]["child_choice"] = {}
+    preview = run_fixture(fx).preview or ""
+    assert "Check needed · IMG_0107.jpg:" in preview and "unknown, please tell me" in preview
+    past = run_fixture(load("testkit-a")).preview or ""
+    assert "⚠ 2026-" in past and "(past)" in past
+
+
+def test_completion_card_four_parts_with_real_results() -> None:
+    out = run_fixture(flow_a())
+    lines = out.completion_card.splitlines()
+    assert lines[0] == "Done. 3 deadlines, 1 event, 2 artworks."
+    assert lines[1] == "Next due: 2026-10-31 · field-trip fee · KRW 12,000 · Mina · IMG_0104.jpg"
+    assert "- Album 'School notices 2026-10' · 4 photos · id a1f0c2d4-0001" in lines
+    assert "- Saved digest · " + (out.saved_path or "?") in lines
+    assert "- Tagged 6 photos fridge-door-done" in lines
+    assert lines[-1].startswith("Skipped 1 (receipt)") and "Nothing moved or deleted" in lines[-1] and lines[-1].endswith("stayed on this NAS")
+
+
+def test_completion_card_never_claims_what_was_not_created() -> None:
+    fx = flow_a()
+    fx["approvals"] = {"create_album:Artwork – Mina 2026": False}
+    card = run_fixture(fx).completion_card
+    assert "Album 'Artwork – Mina 2026' · " not in card and "was not created" in card
+    fx = flow_a()
+    fx["experts"]["save_digest"] = {"status": "failed", "result": {"reason": "disk full"}}
+    card = run_fixture(fx).completion_card
+    assert "Saved digest" not in card and "Digest was not saved" in card
+
+
+def test_loading_progress_line_per_photo() -> None:
+    out = run_fixture(flow_a())
+    assert out.progress == [f"Reading photos {i}/7" for i in range(1, 8)]
+
+
+def test_digest_meta_line_and_past_warning_prefix() -> None:
+    digest = run_fixture(flow_a()).digest or ""
+    assert digest.splitlines()[1] == "Source: Photos/PhoneBackup · 7 photos read · Generated on NAS 2026-10-26"
+    kit = run_fixture(load("testkit-a")).digest or ""
+    assert "- [ ] ⚠ 2026-" in kit and " · past" not in kit
+
+
+def test_readme_shows_the_same_cards_as_the_dry_run() -> None:
+    out = run_fixture(flow_a())
+    readme = README.read_text(encoding="utf-8")
+    indent = "\n".join(("    " + line) if line else "" for line in (out.preview or "").splitlines())
+    assert indent in readme
+    assert "\n".join("    " + line for line in out.completion_card.splitlines()) in readme

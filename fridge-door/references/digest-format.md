@@ -1,11 +1,12 @@
 # Digest format
 
-The digest is one Markdown file per run, saved as "Fridge Door – {period}.md" in the agreed output folder. It always has the title line and the same seven sections in the same order, even when a section is empty. Write it in the parent language. Use only real results from the run; every item names its source photo file.
+The digest is one Markdown file per run, saved as "Fridge Door – {period}.md" in the agreed output folder. It always has the title line, a meta line and the same seven sections in the same order, even when a section is empty. Write it in the parent language. Use only real results from the run; every item names its source photo file.
 
 ## Fixed layout
 
 ```
 # Fridge Door – {period}
+Source: {source_folder} · {N} photos read · Generated on NAS {date time}
 
 ## At a glance
 ## Deadlines
@@ -18,8 +19,10 @@ The digest is one Markdown file per run, saved as "Fridge Door – {period}.md" 
 
 ## Section rules
 
+0. **Meta line**, directly under the title: `Source: {source_folder} · {N} photos read · Generated on NAS {YYYY-MM-DD HH:MM}`. N is the number of photos read in this run (the photos to process); use `{today}` alone when the NAS time is not known.
+
 1. **At a glance**: the next due item with its date and source file; counts of deadlines (past ones separately), events, artworks per child; how many photos were left untouched and how many were already handled; album names with photo counts.
-2. **Deadlines**: one checkbox line per due item, earliest first: `- [ ] {date} — {action} · {child} · "{quoted date text}" · {source file}`. Add "past" when the due date is before the run date. Add "carried over from {previous digest name}" for items taken from the last digest. The parent ticks a box (`- [x]`) when done; the next run treats ticked lines as done.
+2. **Deadlines**: one checkbox line per due item, earliest first: `- [ ] {date} — {action} · {child} · "{quoted date text}" · {source file}`. Put the warning prefix `⚠` before the date when the due date is before the run date: `- [ ] ⚠ {date} — ...`. Add "carried over from {previous digest name}" for items taken from the last digest. The parent ticks a box (`- [x]`) when done; the next run treats ticked lines as done.
 3. **Events**: one line per event with date and time, what it is, who it concerns, the quoted date text and the source file. No checkbox.
 4. **Notices**: a table with one row per notice: source file, original key line (quoted as read), summary in the parent language, due date, action. When translation failed, keep the original summary and write "translation unavailable".
 5. **Artwork**: one subheading per child, then one line per photo: source file, the caption from the vision check, and how the child was assigned (name read on the drawing, people album, or chosen by the parent). Artwork without a child goes under "Child not chosen".
@@ -34,6 +37,7 @@ This example uses invented names and a fictional school. Parent language: Englis
 
 ```
 # Fridge Door – 2026-10-19 to 2026-10-25
+Source: Photos/PhoneBackup · 7 photos read · Generated on NAS 2026-10-26 21:14
 
 ## At a glance
 - Next due: field-trip fee KRW 12,000 by 2026-10-31 (IMG_0104.jpg)

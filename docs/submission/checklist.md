@@ -39,7 +39,7 @@
 |---|---|---|
 | 영어 스토리(항목별 붙여넣기용) | 완료 | `docs/submission/devpost.md` |
 | 썸네일 1200×800 | 완료 | `docs/submission/gallery/thumbnail.png` |
-| 갤러리 2장 이상 | 완료 | 4장(`01-flow`~`04-privacy`, 1500×1000) |
+| 갤러리 2장 이상 | 완료 | 5장(`00-chat`~`04-privacy`, 1500×1000). `00-chat`은 채팅 미리보기·완료 카드 |
 | 라이선스(MIT)·AI 도구(Claude Code, UGOS Skill Creation Tool 0.7.3)·제3자 none 공개문 | 완료 | devpost.md 하단 |
 | 저장소 공개 여부 결정 | 남음-사용자 계정 필요 | `sh0sub/fridge-door`가 현재 비공개. 공개하거나 devpost.md "Try it out"의 저장소 줄 삭제 |
 | 트랙 선택(Bring Memories to Life) | 남음-사용자 계정 필요 | Devpost 폼 |

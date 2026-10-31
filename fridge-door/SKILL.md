@@ -70,6 +70,8 @@ For each `{photo_path}` in `{new_photos}`, one at a time:
 
 `delegate --target photo-agent --instruction 'Run OCR on the image {photo_path} and return the recognised text exactly as read, in reading order, with unclear parts marked. Do not describe the picture, do not add text that is not in the image, and do not change the photo or any album. If no text is recognised, return an empty result and say so.'`
 
+Show a one-line progress message before each photo, for example "Reading photos 4/7", and keep it to that single line.
+
 Sort each photo by its real OCR result `{ocr_text}`:
 
 - Several lines that read as a school notice, newsletter, permission slip, fee notice or class message: add to `{notice_items}`.
@@ -127,9 +129,9 @@ Show one preview: deadlines in date order (past ones flagged), events, notice su
 
 Preview format (plain text in the chat, written in `{parent_language}`; use the real values from earlier steps and leave a line out when it has nothing to show):
 
-1. Summary strip, first line: "N photos found · N already done · N to process", then the folder and period.
+1. Summary strip: an opening line "N photos read. Please check before I save anything.", then "N photos found · N already done · N to process", then the folder and period.
 2. Warning line, only when OCR confidence was low for a photo: name the file and what could not be read, and ask which child it belongs to.
-3. Group "School notices (N)": one line per notice in date order with file name, title, due date or event date and time, the action (pay, return, bring, attend) with any amount, and the child (or all children). Past due dates are flagged.
+3. Group "School notices (N)": one line per notice in date order with file name, title, due date or event date and time, the action (pay, return, bring, attend) with any amount, and the child (or all children). Past due dates carry the prefix "⚠" and the word "past".
 4. Group "Artwork (N)": one line per drawing with file name, the child (or "unknown, please tell me") and the caption.
 5. Group "Not related / unreadable (N)": file name with a one-word reason (receipt, screenshot, too blurred).
 6. What will be created: album names with photo counts, the digest file name in `{output_folder}`, and the tag.
@@ -151,7 +153,7 @@ If adding photos by path is not supported and the step ends as `failed`, explain
 
 ## Step 8: Save the digest (after the user agrees)
 
-Compose `{digest_text}` following [references/digest-format.md](references/digest-format.md): seven sections in fixed order, only real results, and every item naming its source photo file. Save it:
+Compose `{digest_text}` following [references/digest-format.md](references/digest-format.md): a meta line (source folder, photos read, NAS date and time) and seven sections in fixed order, only real results, and every item naming its source photo file. Save it:
 
 `delegate --target knowledge-agent --instruction 'Save the following Markdown text as a new file in the folder {output_folder}, creating the folder if it does not exist, using the file name hint Fridge Door – {period}. Do not overwrite an existing file; if the name is taken, add a number. Return the real saved path and whether the save was verified. Text: {digest_text}'`
 
@@ -181,7 +183,7 @@ Completion card (plain text in the chat, in `{parent_language}`):
 
 1. Result line first: "Done. N deadlines, N events, N artworks." Counts come from the real results.
 2. Next due item, highlighted: the earliest open deadline with its date, task, amount, child and source file name.
-3. Created items, only what an expert returned as `completed`: each album with its real identifier and photo count, and the digest with its real `{saved_path}`. Never write an identifier or path that was not returned. For an album or file that was denied or failed, say it was not created and why.
+3. Created items, only what an expert returned as `completed`: each album with its real identifier and photo count, the digest with its real `{saved_path}`, and the tag result as "Tagged N photos fridge-door-done" with N the number of files the expert returned as tagged (leave the line out when tagging did not run or failed, and say so in the status line). Never write an identifier or path that was not returned. For an album or file that was denied or failed, say it was not created and why.
 4. Status line, last: photos skipped as already done or unrelated, photos that could not be read, "nothing was moved or deleted", "everything stayed on this NAS".
 
 # Completion and failure
