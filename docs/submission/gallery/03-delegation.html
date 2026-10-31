@@ -1,0 +1,29 @@
+<!doctype html><meta charset="utf-8"><title>delegation</title><link rel="stylesheet" href="base.css">
+<style>
+table{border-collapse:collapse;width:100%;font-size:23px;background:#fff}
+th,td{padding:11px 16px;text-align:left;border-bottom:2px solid var(--line);vertical-align:top}
+th{background:var(--blue);color:#fff;font-size:22px;letter-spacing:.04em}
+tr:last-child td{border-bottom:none}
+td.n{font-weight:800;color:var(--blue);width:80px}
+code{font-family:Menlo,monospace;font-size:22px;background:var(--canvas);padding:2px 7px;border-radius:6px}
+.w{color:var(--amber);font-weight:700}
+.r{color:var(--mute)}
+.card.t{overflow:hidden;flex:none}
+.pills{display:flex;gap:14px;margin-top:22px;font-size:22px}
+.pills span{padding:8px 18px;border-radius:999px;background:#fff;border:2px solid var(--line)}
+</style>
+<div class="kicker">Expert delegation</div>
+<h1>The Skill only delegates. Four experts do the work.</h1>
+<p class="lead">Uliya issues <code>delegate</code> commands in fixed order and passes only real upstream results forward.</p>
+<div class="card t"><table>
+<tr><th>Step</th><th>What happens</th><th>Expert agent</th><th>CLI and action</th><th>Effect</th></tr>
+<tr><td class="n">1</td><td>List the period's images</td><td>file-agent</td><td><code>ug-filesystem</code> find</td><td class="r">read</td></tr>
+<tr><td class="n">2, 9</td><td>Skip handled photos; tag new ones</td><td>file-agent</td><td><code>ug-filemgr</code> tag lookup, tag-add-file</td><td class="w">adds one tag</td></tr>
+<tr><td class="n">3&ndash;4</td><td>Read notices; caption drawings</td><td>photo-agent</td><td><code>ug-photo</code> vision-ocr, vision-vlm</td><td class="r">read</td></tr>
+<tr><td class="n">5</td><td>Condense and translate summaries</td><td>document-agent</td><td><code>ug-document</code> writing, translate</td><td class="r">returns text only</td></tr>
+<tr><td class="n">7</td><td>Create albums in Photos</td><td>photo-agent</td><td><code>ug-photo</code> create-album</td><td class="w">creates albums</td></tr>
+<tr><td class="n">8</td><td>Save the digest</td><td>knowledge-agent</td><td><code>ug-knowledge</code> save-text</td><td class="w">writes one new file</td></tr>
+</table></div>
+<div class="pills"><span>completed</span><span>failed</span><span>waiting_approval</span><span>waiting_user</span><span>cancelled</span></div>
+<p class="lead" style="margin-top:18px;font-size:22px">All five delegation states are handled. Writes (amber) happen only after the preview, the parent's yes and the NAS approval.</p>
+<div class="foot"><span>The Skill itself never runs a CLI &middot; Markdown only, no scripts</span><span>Fridge Door &middot; UGREEN Hackathon 2026</span></div>

@@ -1,0 +1,33 @@
+<!doctype html><meta charset="utf-8"><title>flow</title><link rel="stylesheet" href="base.css">
+<style>
+.row{display:flex;align-items:stretch;gap:0;margin-top:6px}
+.step{flex:1;padding:24px 20px;text-align:center}
+.step b{display:block;font-size:30px;margin-bottom:8px}
+.step span{font-size:21px;color:var(--mute);line-height:1.3;display:block}
+.arrow{width:46px;display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--blue)}
+.s1,.s2,.s3{background:#fff}
+.s4{background:#fff6dc;border-color:var(--amber)}
+.s5{background:#e6f7ec;border-color:var(--green)}
+.say{margin-top:34px;padding:24px 30px;font-size:28px}
+.say em{color:var(--blue);font-style:normal;font-weight:700}
+.notes{display:flex;gap:24px;margin-top:24px}
+.notes .card{flex:1;padding:20px 26px;font-size:23px;line-height:1.4}
+.notes b{color:var(--blue)}
+</style>
+<div class="kicker">How it works</div>
+<h1>From a forgotten photo to a dated to-do</h1>
+<p class="lead">One weekly request. Nothing is created until the parent has seen the preview and said yes.</p>
+<div class="row">
+ <div class="card step s1"><b>Photos on NAS</b><span>Phone backup folder, last 7 days, up to 12 images</span></div><div class="arrow">&rarr;</div>
+ <div class="card step s2"><b>OCR / vision</b><span>Built-in NAS models read notices and caption drawings</span></div><div class="arrow">&rarr;</div>
+ <div class="card step s3"><b>Structured items</b><span>Deadline, action, amount, child, source photo</span></div><div class="arrow">&rarr;</div>
+ <div class="card step s4"><b>Confirm</b><span>Preview, then parent approval and NAS approval</span></div><div class="arrow">&rarr;</div>
+ <div class="card step s5"><b>Results</b><span>Albums in Photos, one digest file, done tags</span></div>
+</div>
+<div class="card say"><em>&ldquo;Sort out this week's school papers.&rdquo;</em> &rarr; confirm folder, period, children &rarr; read each photo &rarr; preview &rarr; approve &rarr; report with the next due item and every source file name.</div>
+<div class="notes">
+ <div class="card"><b>Next week</b><br>Handled photos carry the <code>fridge-door-done</code> tag, so only new ones are read.</div>
+ <div class="card"><b>When it can't read</b><br>Blurred or unreadable photos are listed by name. Nothing is guessed.</div>
+ <div class="card"><b>Originals</b><br>Never renamed, moved or deleted.</div>
+</div>
+<div class="foot"><span>Fridge Door &middot; independent community Skill, not an official UGREEN product</span><span>UGREEN Hackathon 2026</span></div>
