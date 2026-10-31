@@ -118,3 +118,27 @@ Re-run: pytest 122 passed, ruff and mypy clean, `scripts/check.py fridge-door` s
 | id | artifact section | expected | status | evidence |
 |---|---|---|---|---|
 | S1-gallery-artwork-list | mockup S1 / 09 gallery | Gallery preview card matches dry run and README: Artwork (2) lists IMG_0107 and IMG_0106, separate Not related group, Will save includes tag clause | fixed (Round 4) | gallery/00-chat.html and regenerated 00-chat.png; test_gallery_preview_card_lists_every_counted_artwork. Supersedes C3-S1-gallery, R4-gallery-artwork, R4C-gallery |
+
+## Round 5 audit (2026-11-01, independent, full conformance)
+
+Re-run: pytest 123 passed (.venv), ruff and mypy clean, `scripts/check.py fridge-door` static-pass (0 error 0 warning), dry run flow-a completed (21 delegations, 2 waiting_approval then completed, Preview/Progress/Digest printed), dist ZIP extracted and diffed against fridge-door/ (identical, 5 files, 15,854 bytes), proposal 489 words. Gallery 00-chat.png re-viewed: Artwork (2) lists both items, separate Not related group, tag clause present (Round 4 fix confirmed).
+
+| id | artifact section | expected | status | evidence |
+|---|---|---|---|---|
+| R5-S1 | mockup S1 | Preview card 9/2/7 strip, warning, grouped lists, Will create/save, Proceed | match | dryrun Preview; 00-chat.png left card |
+| R5-S2 | mockup S2 | Completion card Next due, real ids, tag line, grey status | match | 00-chat.png right card |
+| R5-S3 | mockup S3 | Digest with source files, checkboxes, meta line | match | dryrun delegation 20 |
+| R5-flow | 06 flows A/B/C | Runnable via dry run | match | flow-a, testkit-a, testkit-b |
+| R5-count | 09 / Devpost | Test-count claim matches reality | gap (low) | pytest now 123 passed; proposal.html:83, devpost.md:47 and :60, checklist.md:12 still say 122 |
+| R5-official | 09 | Official check-skill.mjs rerun | blocked | kit not installed; docs/checks/check-skill-2026-10-27.md stale (test-plan.md hash changed) |
+| R5-S4/S5sign/S6/real | S4, S5, S6, criteria | Real NAS album, signature, video, real-data run | blocked | Round 2 device / user input |
+
+## Round 6 confirmation (2026-11-01, independent)
+
+Re-run: pytest 123 passed, ruff and mypy clean, `scripts/check.py fridge-door` 0 error 0 warning, flow-a dry run completed, dist ZIP extracted and diffed (identical).
+
+| id | artifact section | expected | status | evidence |
+|---|---|---|---|---|
+| R6-count | 09 / Devpost | Test-count claim matches pytest | gap (low) | still 122 in proposal.html, devpost.md, checklist.md; pytest is 123. Same as R5-count |
+| R6-all | 05, 06, S1-S3, S5 | Everything else | match | Round 5 table reconfirmed by dry run output |
+| R6-blocked | S4, S5 signature, S6, official checker, real NAS | n/a | blocked | device/user input, kit not installed |
