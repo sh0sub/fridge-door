@@ -35,7 +35,7 @@ Evidence: scripts/check.py (0 error, 0 warning), pytest 115 passed, ruff and myp
 | S4 | mockup S4 | Album grows 2 to 5 on rerun | match (spec) | Steps 6-7 add-to-existing; real UI only Round 2 |
 | S4-img | mockup S4 | Photos app screenshot | blocked | needs real NAS (Round 2) |
 | S5-pdf | mockup S5 | 1 page A4, 10 items, under 500 words, under 1 MB | match | PDF 109 KB, 491 words, 1 page |
-| S5-layout | mockup S5 | Two columns 62/38 with NAS features table and test plan box | gap (low) | PDF is single column, details inlined in items 6 and 9 |
+| S5-layout | mockup S5 | Two columns 62/38 with NAS features table and test plan box | match | Two columns 62/38, NAS features table, boxed test plan; 1 page (R2 fix-r2/proposal.pdf.png) |
 | S5-sign | mockup S5 | Name, signature, date, word count in footer | blocked | Name and signature are user input (checklist) |
 | S5-claim | mockup S5 / 09 | "official static checker" claim true | gap | official check-skill.mjs not installed; docs/checks record is stale after test-plan.md change |
 | S6 | mockup S6 | Round 2 video keyframes | blocked | Round 2 on iDX6011 Pro |
@@ -45,3 +45,18 @@ Evidence: scripts/check.py (0 error, 0 warning), pytest 115 passed, ruff and myp
 
 
 Round 1 fix evidence: pytest 122 passed (7 new card tests), ruff and mypy clean, `python3 scripts/check.py fridge-door` 0 error 0 warning, dist ZIP rebuilt. New conformance tests: tests/integration/test_dryrun.py (card formats; README samples equal dry-run output).
+
+## Round 2 audit (2026-11-01, independent)
+
+Re-run: pytest 122 passed, ruff and mypy clean, `scripts/check.py` 0 error 0 warning, dry run flow-a completed (21 delegations, 2 waiting_approval then completed), dist ZIP identical to fridge-door/ sources (5 files, 38 KB), proposal 491 words. Screenshot reviewed: docs/submission/gallery/00-chat.png (preview and completion cards).
+
+| id | artifact section | expected | status | evidence |
+|---|---|---|---|---|
+| R2-S1-card | mockup S1 | Preview card: counts strip, low-OCR warning, grouped lists, Will create/save, Proceed | match | dryrun Preview; 00-chat.png left card |
+| R2-S1-lang | mockup S1 | Mockup mixes Korean chat copy | match (intended) | English output chosen for the English-language hackathon |
+| R2-S2-card | mockup S2 | Result line, Next due highlight, real ids, grey status line, approval event | match | dryrun Completion card; 00-chat.png right card |
+| R2-S3 | mockup S3 | Digest sections and checkbox, source file | match | dryrun Digest; 02-digest.png |
+| R2-S4 | mockup S4 | Album growth 2 to 5 | blocked | needs real NAS (Round 2) |
+| R2-S5 | mockup S5 | 1-page proposal under 500 words | match | 491 words |
+| R2-count | 09 / submission | Test-count claims consistent | match | 122 tests stated in proposal.html, devpost.md, checklist.md (pytest 122 passed) |
+| R2-official | 09 | "official static checker" claim | match | Wording now "local port of the official checker rules" (proposal, checklist); official kit not installed, rerun optional if user supplies it |

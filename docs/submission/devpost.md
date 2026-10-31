@@ -44,7 +44,7 @@ The Uliya parent agent never touches the NAS itself. It issues only `delegate` c
 
 All five delegation states (completed, failed, waiting for approval, waiting for the user, cancelled) are handled, as are empty and partial results. An optional archive step exists but is off by default and runs only on explicit request.
 
-Because there is no NAS available before Round 2, we built a Python checker (a port of the uliya-skill-kit 0.7.3 rules plus our own checklist), a ZIP builder with size and file limits, and a dry-run harness that follows `SKILL.md` step by step against simulated expert answers. 115 automated tests cover the checker, the package and the dry runs.
+Because there is no NAS available before Round 2, we built a Python checker (a port of the uliya-skill-kit 0.7.3 rules plus our own checklist), a ZIP builder with size and file limits, and a dry-run harness that follows `SKILL.md` step by step against simulated expert answers. 122 automated tests cover the checker, the package and the dry runs.
 
 ## Challenges we ran into
 - **Orchestrating without a device.** The real answer formats of the experts are not documented, so the dry-run fixtures use minimal assumed shapes. We marked them as unverified and kept every instruction defensive: say "no results" when empty, never invent a value.
@@ -57,7 +57,7 @@ Because there is no NAS available before Round 2, we built a Python checker (a p
 - A fixed, readable digest where every to-do points back to its source photo.
 - Run memory without a database: the NAS file tag `fridge-door-done` is the only state, so a second run skips everything already handled.
 - A 16-photo invented test kit specified for the device test: 8 notices (5 Korean, 3 English, 1 past-dated), 6 drawings (2 with a child's name written on them, 1 deliberately blurred), 1 receipt and 1 screenshot. Expected result: 6 deadlines (1 past) and 2 events from the notices, and a second run that skips all 13 handled photos while the receipt, the screenshot and the blurred drawing are reported, not handled.
-- 115 automated tests.
+- 122 automated tests.
 
 ## What we learned
 - On a NAS Skill, the best prompt is a boring one: fixed steps, quoted values, one delegate per line, and a rule for every state the expert can return.

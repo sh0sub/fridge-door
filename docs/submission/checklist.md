@@ -9,7 +9,7 @@
 | 폴더명 = name = `fridge-door`, frontmatter는 name·description만 | 완료 | 로컬 검사기 통과 |
 | description ≤1,024자, "Use when" 포함, 명령형 아님 | 완료 | 로컬 검사기 통과 |
 | Generation-time capability evidence 5줄 | 완료 | SKILL.md 상단 |
-| delegate 규칙(한 줄·작은따옴표·target 6개 이내·파이프/리다이렉트 없음) | 완료 | 로컬 검사기 + 115개 테스트 |
+| delegate 규칙(한 줄·작은따옴표·target 6개 이내·파이프/리다이렉트 없음) | 완료 | 로컬 검사기 + 122개 테스트 |
 | 5개 상태 토큰, "no results", "real result"/"upstream" 문구 | 완료 | 로컬 검사기 |
 | 금지어 grep 0건, 코드 펜스 언어 태그 없음, 과장어 없음 | 완료 | 2026-10-31 직접 grep 확인 |
 | references 전부 SKILL.md에서 직접 링크 | 완료 | 4개 파일 링크됨 |
@@ -25,10 +25,10 @@
 
 | 항목 | 상태 | 근거·메모 |
 |---|---|---|
-| 제안서 PDF 생성 (`docs/proposal/proposal.pdf`) | 완료 | 109,354바이트 (≤1 MB) |
-| 10항목 실질 답변 ≤500단어 | 완료 | 자동 카운트 491단어 |
+| 제안서 PDF 생성 (`docs/proposal/proposal.pdf`) | 완료 | 125,499바이트 (≤1 MB) |
+| 10항목 실질 답변 ≤500단어 | 완료 | 자동 카운트 489단어 |
 | 제3자 구성요소·AI 도구 명시 | 완료 | 제안서 하단 |
-| 제안서 문구 "official static checker"가 사실과 맞는지 | 남음-Claude | 현재 공식 검사기 재실행분이 없어 위 공식 검사 재실행 후 문구 확정 |
+| 제안서 문구 "local port of the official checker rules" | 완료 | 공식 키트 미설치라 "official checker 통과" 대신 로컬 포트로 표기(사실과 일치). 공식 재실행은 키트 확보 시 선택 |
 | 이름·서명·날짜(`Date: 2026-11-__`) | 남음-사용자 계정 필요 | 사용자 본인 서명·날짜. 기입 후 PDF 재생성은 Claude 가능 |
 | 개인정보 없음(학교·아이 이름·전화번호 가상) | 완료 | 테스트 자료는 가상 데이터(`02-000-0000`) |
 | 16장 테스트킷 실물 이미지 | 남음-Claude | 명세만 있고 이미지는 Round 2 전 준비(#28). Round 1 제출물 아님 |
