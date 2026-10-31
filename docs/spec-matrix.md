@@ -60,3 +60,31 @@ Re-run: pytest 122 passed, ruff and mypy clean, `scripts/check.py` 0 error 0 war
 | R2-S5 | mockup S5 | 1-page proposal under 500 words | match | 491 words |
 | R2-count | 09 / submission | Test-count claims consistent | match | 122 tests stated in proposal.html, devpost.md, checklist.md (pytest 122 passed) |
 | R2-official | 09 | "official static checker" claim | match | Wording now "local port of the official checker rules" (proposal, checklist); official kit not installed, rerun optional if user supplies it |
+
+## Round 3 audit (2026-11-01, independent, full conformance)
+
+Re-run: pytest 122 passed (.venv), ruff and mypy clean, `scripts/check.py fridge-door` 0 error 0 warning, dry run flow-a completed (21 delegations, 2 waiting_approval then completed, preview/progress/digest printed), dist ZIP extracted and diffed against fridge-door/ (identical, 15,854 bytes), proposal count 489 words, proposal.pdf 125 KB, git tree clean. Gallery 00-chat.png reviewed against mockups S1/S2.
+
+| id | artifact section | expected | status | evidence |
+|---|---|---|---|---|
+| R3-S1 | mockup S1 | Preview card: counts strip 9/2/7, warning, grouped lists, Will create/save, Proceed | match | dryrun Preview; 00-chat.png |
+| R3-S2 | mockup S2 | Completion card with Next due, real ids, grey status line | match | 00-chat.png right card |
+| R3-S3 | mockup S3 | Digest preview with source files and checkboxes | match | dryrun Digest; 02-digest.png |
+| R3-flow | 06 flows A/B/C | Confirm, read, preview, approve, save, tag; empty and denied paths | match | dryrun flow-a; integration tests |
+| R3-S4 | mockup S4 | Real Photos album growth | blocked | needs real NAS (Round 2) |
+| R3-S5 | mockup S5 | Signature and date | blocked | user input |
+| R3-S6 | mockup S6 | Round 2 video keyframes | blocked | Round 2 on device |
+| R3-official | 09 | Official check-skill.mjs 0 error | blocked | kit not installed, no third-party install allowed; docs/checks record stale |
+| R3-win-real | criteria AI NAS Fit | Judge sees run on real data | blocked | cards are dry-run simulated; real NAS only Round 2 |
+
+## Round 3 confirmation pass (2026-11-01, independent)
+
+Re-run: pytest 122 passed, ruff and mypy clean, `scripts/check.py fridge-door` 0 error 0 warning, dry runs flow-a, testkit-a (translation, waiting_approval, same-name album check) and testkit-b (unreadable photo failed delegations, figure-name fallback) all completed, dist ZIP diffed against fridge-door/ (identical, 15,854 bytes).
+
+| id | artifact section | expected | status | evidence |
+|---|---|---|---|---|
+| C3-FB | 06 flow B | Translation flow runnable | match | testkit-a dry run has 4 translate delegations, one waiting_approval; earlier row "no dryrun fixture for flow B" is stale |
+| C3-FC | 06 flow C | Unreadable photos, fallback | match | testkit-b preview prints "Check needed ... could not be read" and Not related / unreadable section; 2 failed delegations handled |
+| C3-S1-gallery | mockup S1 | Preview card sample consistent | gap (low) | gallery/00-chat.png says "Artwork (2)" but lists only IMG_0106; IMG_0107 appears only in the warning, unlike README sample and dry-run output (both list both items) |
+| C3-zip-size | 09 / Devpost | ZIP size stated correctly | fixed (Round 3) | devpost.md:36 and checklist.md:18 now say 15,854 bytes (stat dist/fridge-door.zip = 15,854); checklist max file size corrected to 20,074 bytes (SKILL.md) |
+| C3-S1-warn-render | mockup S1 | Low-OCR warning shown in a real run | match (spec) | flow-a dry run prints no warning (name read from the drawing); warning rendered in testkit-b and gallery |

@@ -33,7 +33,7 @@ Once a week the parent says, for example, "Sort out this week's school papers." 
 The digest always has the same seven sections: At a glance, Deadlines (checkbox lines in date order, past ones flagged), Events, Notices (with summaries translated into the parent's language when it differs), Artwork, Needs your check, and Left untouched and run details. Every item names its source photo file. Receipts and screenshots are listed and left untouched; blurred or unreadable photos are listed by name instead of being guessed. Original photos are never renamed or deleted.
 
 ## How we built it
-Fridge Door is a Markdown-only orchestration Skill built with the UGOS Skill Creation Tool (uliya-skill-kit 0.7.3) and the Uliya Skill Development Standard. The package is `SKILL.md` plus four references (user guide, digest format, disclosures, test plan): 5 files, 14,711 bytes zipped, no scripts or binaries.
+Fridge Door is a Markdown-only orchestration Skill built with the UGOS Skill Creation Tool (uliya-skill-kit 0.7.3) and the Uliya Skill Development Standard. The package is `SKILL.md` plus four references (user guide, digest format, disclosures, test plan): 5 files, 15,854 bytes zipped, no scripts or binaries.
 
 The Uliya parent agent never touches the NAS itself. It issues only `delegate` commands, in a fixed order, to four registered expert agents, and passes only real upstream results into the next step:
 

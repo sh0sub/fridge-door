@@ -15,7 +15,7 @@
 | references 전부 SKILL.md에서 직접 링크 | 완료 | 4개 파일 링크됨 |
 | 루트에 README·.DS_Store·스크립트 없음, `__MACOSX` 없음 | 완료 | ZIP 5개 파일, 해당 항목 0건 |
 | 로컬 검사 `scripts/check.py fridge-door --summary` | 완료 | 0 error, 0 warning (2026-10-31) |
-| ZIP ≤10 MB, 파일 ≤100, 파일당 ≤1 MB | 완료 | 14,711바이트, 5개 파일, 최대 19,597바이트(SKILL.md) |
+| ZIP ≤10 MB, 파일 ≤100, 파일당 ≤1 MB | 완료 | 15,854바이트, 5개 파일, 최대 20,074바이트(SKILL.md) |
 | ZIP 빌드 (`dist/fridge-door.zip`) | 완료 | `python3 -m scripts.build_zip`. 최종 제출 직전(11/13) 재빌드 필요 |
 | 공식 `check-skill.mjs` 0 error | 남음-Claude | 공식 키트가 이 환경에 없음. 2026-10-27 공식 실행 기록(docs/checks)이 있으나 이후 `references/test-plan.md`가 바뀌어(해시 불일치) 기록이 낡음. 키트를 받아 사용자가 설치한 뒤 재실행하고 docs/checks를 갱신해야 함 |
 | v0.9.0 문구 점검(README만 보고 흐름 설명 가능한지 지인 1명 확인) | 남음-사용자 계정 필요 | 지인 확인은 사용자가 해야 함. 반영은 Claude |
