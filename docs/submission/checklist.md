@@ -9,7 +9,7 @@
 | 폴더명 = name = `fridge-door`, frontmatter는 name·description만 | 완료 | 로컬 검사기 통과 |
 | description ≤1,024자, "Use when" 포함, 명령형 아님 | 완료 | 로컬 검사기 통과 |
 | Generation-time capability evidence 5줄 | 완료 | SKILL.md 상단 |
-| delegate 규칙(한 줄·작은따옴표·target 6개 이내·파이프/리다이렉트 없음) | 완료 | 로컬 검사기 + 122개 테스트 |
+| delegate 규칙(한 줄·작은따옴표·target 6개 이내·파이프/리다이렉트 없음) | 완료 | 로컬 검사기 + 123개 테스트 |
 | 5개 상태 토큰, "no results", "real result"/"upstream" 문구 | 완료 | 로컬 검사기 |
 | 금지어 grep 0건, 코드 펜스 언어 태그 없음, 과장어 없음 | 완료 | 2026-10-31 직접 grep 확인 |
 | references 전부 SKILL.md에서 직접 링크 | 완료 | 4개 파일 링크됨 |
@@ -25,7 +25,7 @@
 
 | 항목 | 상태 | 근거·메모 |
 |---|---|---|
-| 제안서 PDF 생성 (`docs/proposal/proposal.pdf`) | 완료 | 125,499바이트 (≤1 MB) |
+| 제안서 PDF 생성 (`docs/proposal/proposal.pdf`) | 완료 | 125,834바이트 (≤1 MB) |
 | 10항목 실질 답변 ≤500단어 | 완료 | 자동 카운트 489단어 |
 | 제3자 구성요소·AI 도구 명시 | 완료 | 제안서 하단 |
 | 제안서 문구 "local port of the official checker rules" | 완료 | 공식 키트 미설치라 "official checker 통과" 대신 로컬 포트로 표기(사실과 일치). 공식 재실행은 키트 확보 시 선택 |

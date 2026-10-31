@@ -34,7 +34,7 @@ Evidence: scripts/check.py (0 error, 0 warning), pytest 115 passed, ruff and myp
 | S3-meta | mockup S3 | Meta line "7 photos read, generated on NAS timestamp", past mark | match (round 1) | digest-format.md meta line and `⚠` prefix replace "past"; dryrun digest; test_digest_meta_line_and_past_warning_prefix. At a glance and merged Not processed stay (docs/plan.md:513) |
 | S4 | mockup S4 | Album grows 2 to 5 on rerun | match (spec) | Steps 6-7 add-to-existing; real UI only Round 2 |
 | S4-img | mockup S4 | Photos app screenshot | blocked | needs real NAS (Round 2) |
-| S5-pdf | mockup S5 | 1 page A4, 10 items, under 500 words, under 1 MB | match | PDF 109 KB, 491 words, 1 page |
+| S5-pdf | mockup S5 | 1 page A4, 10 items, under 500 words, under 1 MB | match | PDF 126 KB, 489 words, 1 page |
 | S5-layout | mockup S5 | Two columns 62/38 with NAS features table and test plan box | match | Two columns 62/38, NAS features table, boxed test plan; 1 page (R2 fix-r2/proposal.pdf.png) |
 | S5-sign | mockup S5 | Name, signature, date, word count in footer | blocked | Name and signature are user input (checklist) |
 | S5-claim | mockup S5 / 09 | "official static checker" claim true | gap | official check-skill.mjs not installed; docs/checks record is stale after test-plan.md change |
@@ -58,7 +58,7 @@ Re-run: pytest 122 passed, ruff and mypy clean, `scripts/check.py` 0 error 0 war
 | R2-S3 | mockup S3 | Digest sections and checkbox, source file | match | dryrun Digest; 02-digest.png |
 | R2-S4 | mockup S4 | Album growth 2 to 5 | blocked | needs real NAS (Round 2) |
 | R2-S5 | mockup S5 | 1-page proposal under 500 words | match | 491 words |
-| R2-count | 09 / submission | Test-count claims consistent | match | 122 tests stated in proposal.html, devpost.md, checklist.md (pytest 122 passed) |
+| R2-count | 09 / submission | Test-count claims consistent | match | 123 tests stated in proposal.html, devpost.md, checklist.md (pytest 123 passed) |
 | R2-official | 09 | "official static checker" claim | match | Wording now "local port of the official checker rules" (proposal, checklist); official kit not installed, rerun optional if user supplies it |
 
 ## Round 3 audit (2026-11-01, independent, full conformance)
@@ -129,7 +129,7 @@ Re-run: pytest 123 passed (.venv), ruff and mypy clean, `scripts/check.py fridge
 | R5-S2 | mockup S2 | Completion card Next due, real ids, tag line, grey status | match | 00-chat.png right card |
 | R5-S3 | mockup S3 | Digest with source files, checkboxes, meta line | match | dryrun delegation 20 |
 | R5-flow | 06 flows A/B/C | Runnable via dry run | match | flow-a, testkit-a, testkit-b |
-| R5-count | 09 / Devpost | Test-count claim matches reality | gap (low) | pytest now 123 passed; proposal.html:83, devpost.md:47 and :60, checklist.md:12 still say 122 |
+| R5-count | 09 / Devpost | Test-count claim matches reality | match | fixed in Round 7: proposal.html, devpost.md, checklist.md now say 123 |
 | R5-official | 09 | Official check-skill.mjs rerun | blocked | kit not installed; docs/checks/check-skill-2026-10-27.md stale (test-plan.md hash changed) |
 | R5-S4/S5sign/S6/real | S4, S5, S6, criteria | Real NAS album, signature, video, real-data run | blocked | Round 2 device / user input |
 
@@ -139,6 +139,10 @@ Re-run: pytest 123 passed, ruff and mypy clean, `scripts/check.py fridge-door` 0
 
 | id | artifact section | expected | status | evidence |
 |---|---|---|---|---|
-| R6-count | 09 / Devpost | Test-count claim matches pytest | gap (low) | still 122 in proposal.html, devpost.md, checklist.md; pytest is 123. Same as R5-count |
+| R6-count | 09 / Devpost | Test-count claim matches pytest | match | fixed in Round 7 (all docs say 123, pytest 123 passed) |
 | R6-all | 05, 06, S1-S3, S5 | Everything else | match | Round 5 table reconfirmed by dry run output |
 | R6-blocked | S4, S5 signature, S6, official checker, real NAS | n/a | blocked | device/user input, kit not installed |
+
+## Round 7 polish (2026-11-01)
+
+Re-run: pytest 123 passed (.venv), ruff and mypy clean, dist ZIP rebuilt (15,854 bytes, 5 files, identical), proposal.pdf regenerated (125,834 bytes, 1 page, 489 words). Test-count claims fixed to 123 in proposal.html, devpost.md (:47, :60), checklist.md; checklist PDF size updated. ZIP size, file count, kit numbers (16 photos, 13 handled) rechecked, all consistent.
