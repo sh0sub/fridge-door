@@ -38,7 +38,7 @@ Upload the kit into Photos/PhoneBackup in two batches so that one run never hold
 - [ ] Five readable drawings are recognised as artwork with a one-sentence caption.
 - [ ] Two drawings are assigned from the name read on them; for the others, Fridge Door asks which child.
 - [ ] Two "Artwork – {child} {year}" albums are created after approval.
-- [ ] A second run over the same periods reports every photo as already done and creates nothing.
+- [ ] A second run over the same periods skips the 13 handled photos (8 notices, 5 readable drawings) as already done and creates nothing; the receipt, screenshot and blurred drawing are listed again because they were never tagged.
 
 ## Edge: honest failure
 
@@ -53,7 +53,7 @@ Upload the kit into Photos/PhoneBackup in two batches so that one run never hold
 |---|---|---|---|---|---|
 | Core 1 (batch A) | 10 | 6 (1 past) and 2 events | School notices {year-month} (8) | receipt, screenshot | none |
 | Core 2 (batch B) | 6 | 0 | Artwork – {child} {year} for each of 2 children (5 in total) | none | blurred drawing |
-| Second run | same periods | none | none | none | none, everything already done |
+| Second run | same periods | none | none | none | the 3 unhandled photos are listed again; the 13 handled are skipped |
 
 Fill in the actual numbers next to each row on the test day.
 

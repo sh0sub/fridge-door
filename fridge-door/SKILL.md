@@ -125,6 +125,16 @@ For each planned album, with `{album_name}` set to "School notices {year-month}"
 
 Show one preview: deadlines in date order (past ones flagged), events, notice summaries with translations, artwork with captions and the assigned child, carried-over items, unrelated photos that will be left alone, unreadable photos, and exactly what will be created: album names with photo counts, the digest file name inside `{output_folder}`, and the fridge-door-done tag. If an album with the same name exists, ask whether to add the photos to it. State that nothing will be moved or deleted.
 
+Preview format (plain text in the chat, written in `{parent_language}`; use the real values from earlier steps and leave a line out when it has nothing to show):
+
+1. Summary strip, first line: "N photos found · N already done · N to process", then the folder and period.
+2. Warning line, only when OCR confidence was low for a photo: name the file and what could not be read, and ask which child it belongs to.
+3. Group "School notices (N)": one line per notice in date order with file name, title, due date or event date and time, the action (pay, return, bring, attend) with any amount, and the child (or all children). Past due dates are flagged.
+4. Group "Artwork (N)": one line per drawing with file name, the child (or "unknown, please tell me") and the caption.
+5. Group "Not related / unreadable (N)": file name with a one-word reason (receipt, screenshot, too blurred).
+6. What will be created: album names with photo counts, the digest file name in `{output_folder}`, and the tag.
+7. Closing line: "Nothing will be moved or deleted. Proceed? (yes / or correct, e.g. 'IMG_4410 is Jun's')". A one-line text correction updates the entry and the preview is shown again.
+
 Ask the user to approve or correct; this is a `waiting_user` point. If the user declines, show the digest text in the conversation instead and finish as `cancelled` with nothing created.
 
 ## Step 7: Create albums (after the user agrees)
@@ -166,6 +176,13 @@ Wait for approval (`waiting_approval`). This is the only step that moves an orig
 ## Step 11: Report
 
 Report only real results: the next due item, counts of deadlines (past ones separately), events and artwork per child, each album with its real identifier and photo count, the saved digest path, photos left untouched as unrelated, photos already handled, and photos that could not be read. Example: "3 deadlines (earliest: field-trip fee, 10/31), 1 event, 2 artworks (Mina). Albums: School notices 2026-10 (4), Artwork – Mina 2026 (2). Digest saved to {saved_path}. 1 receipt was left untouched."
+
+Completion card (plain text in the chat, in `{parent_language}`):
+
+1. Result line first: "Done. N deadlines, N events, N artworks." Counts come from the real results.
+2. Next due item, highlighted: the earliest open deadline with its date, task, amount, child and source file name.
+3. Created items, only what an expert returned as `completed`: each album with its real identifier and photo count, and the digest with its real `{saved_path}`. Never write an identifier or path that was not returned. For an album or file that was denied or failed, say it was not created and why.
+4. Status line, last: photos skipped as already done or unrelated, photos that could not be read, "nothing was moved or deleted", "everything stayed on this NAS".
 
 # Completion and failure
 
