@@ -41,7 +41,7 @@
 | 썸네일 1200×800 | 완료 | `docs/submission/gallery/thumbnail.png` |
 | 갤러리 2장 이상 | 완료 | 5장(`00-chat`~`04-privacy`, 1500×1000). `00-chat`·`02-digest`는 제목 옆에 "Simulated dry run, not a device screenshot" 표기, 카드 날짜는 2026-11-23~12-12 샘플 |
 | 라이선스(MIT)·AI 도구(Claude Code, UGOS Skill Creation Tool 0.7.3)·제3자 none 공개문 | 완료 | devpost.md 하단 |
-| 저장소 공개 여부 결정 | 남음-사용자 계정 필요 | `sh0sub/fridge-door`가 현재 비공개. 공개하거나 devpost.md "Try it out"의 저장소 줄 삭제 |
+| 저장소 공개 여부 결정 | 완료 (2026-11-01 공개) | `sh0sub/fridge-door` 공개 확인 |
 | 트랙 선택(Bring Memories to Life) | 남음-사용자 계정 필요 | Devpost 폼 |
 | 폼에 텍스트·이미지·ZIP·PDF 입력 후 제출 | 남음-사용자 계정 필요 | Devpost 로그인 필요 |
 | 제출 후 Round 1 자료 삭제 금지 | 남음-사용자 계정 필요 | 제출 후 수정·삭제하지 않기 |

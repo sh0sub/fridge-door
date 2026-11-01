@@ -74,7 +74,7 @@ UGREEN AI NAS (Uliya Skills), UGOS Skill Creation Tool (uliya-skill-kit 0.7.3), 
 ## Try it out
 - Skill package: `fridge-door.zip` (one folder `fridge-door/` with `SKILL.md` and `references/`), uploaded with this submission.
 - In UGOS, open the Uliya Skills page, upload the ZIP, then say "Fridge Door, sort out this week's school papers."
-- Source: https://github.com/sh0sub/fridge-door (MIT) [PRIVATE REPO: make public or remove this line before submitting]
+- Source: https://github.com/sh0sub/fridge-door (MIT)
 - Checkable evidence: 123 automated tests (`pytest`), a static check with 0 errors and 0 warnings, and the 16-photo test kit with expected results in `references/test-plan.md`. Gallery cards are simulated dry-run output, not device screenshots; the device run is the Round 2 plan above.
 
 ---
