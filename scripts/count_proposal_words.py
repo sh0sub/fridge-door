@@ -2,7 +2,7 @@
 """Count the words of the proposal answers (class="answer"), excluding question titles, footer and SVG.
 
 Usage: python3 scripts/count_proposal_words.py [docs/proposal/proposal.html]
-Exits 1 when the total exceeds 500.
+Also reports the whole-page count. Exits 1 when either exceeds 500.
 """
 
 from __future__ import annotations
@@ -44,14 +44,26 @@ def count(html: str) -> list[int]:
     return [len(" ".join(parts).replace("→", " ").split()) for parts in parser.answers]
 
 
+def whole_page(html: str) -> int:
+    """Words of all visible body text (headings, answers, SVG labels, footer, signature line)."""
+    import re
+    from html import unescape
+
+    body = html[html.index("<body>"):]
+    text = unescape(re.sub(r"<[^>]+>", " ", body)).replace("\u2192", " ")
+    return len(text.split())
+
+
 def main(argv: list[str]) -> int:
     path = Path(argv[1]) if len(argv) > 1 else DEFAULT
     counts = count(path.read_text(encoding="utf-8"))
     for i, n in enumerate(counts, 1):
         print(f"{i:>2}: {n}")
     total = sum(counts)
+    whole = whole_page(path.read_text(encoding="utf-8"))
     print(f"answers: {len(counts)}  total words: {total} (limit {LIMIT})")
-    return 0 if len(counts) == 10 and total <= LIMIT else 1
+    print(f"whole page (headings, SVG, footer, signature line): {whole} (limit {LIMIT})")
+    return 0 if len(counts) == 10 and total <= LIMIT and whole <= LIMIT else 1
 
 
 if __name__ == "__main__":

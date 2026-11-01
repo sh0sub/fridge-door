@@ -29,66 +29,48 @@
 <body>
 <header>
   <h1>Fridge Door</h1>
-  <div class="sub">Uliya Skill for UGREEN AI NAS &middot; UGREEN Hackathon 2026, Round 1 proposal</div>
+  <div class="sub">Uliya Skill for UGREEN AI NAS &middot; Round 1 proposal</div>
 </header>
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="cols"><div class="main">
 <section class="q"><h2>1. What does your Skill do?</h2>
-<p class="answer">Fridge Door reads the school notices and children's drawings that sit as photos on the NAS and turns them into a weekly parent to-do digest and per-child artwork albums, entirely on the device.</p></section>
+<p class="answer">Fridge Door turns school-notice and children's-drawing photos on the NAS into a weekly parent to-do digest and per-child artwork albums, entirely on the device.</p></section>
 <section class="q"><h2>2. Target user and problem</h2>
-<p class="answer">Parents of kindergarten and primary-school children who photograph paper notices and artwork. The photos sit forgotten in a backup folder: reply slips and fees are missed, and hundreds of drawings cannot be attributed or found. Parents who do not read the local language are hit hardest.</p></section>
+<p class="answer">Parents of kindergarten and primary-school children who photograph paper notices and artwork, then forget the photos. Illustrative estimate: two children, three notices a week, about 100 deadlines per school year, each a photo nobody reopens. Reply slips and fees get missed, especially by parents who do not read the local language.</p></section>
 <section class="q"><h2>3. Solution</h2>
-<p class="answer">Once a week the parent asks Uliya. The Skill lists the period's photos, reads each with on-device OCR, structures notices into deadline, action, amount and child, and checks picture-only photos with the on-device vision model. After one confirmation it creates albums in UGREEN Photos and saves a digest file. Tagged photos are skipped next time.</p></section>
+<p class="answer">Weekly, the parent asks Uliya. The Skill lists the period's photos, reads them with on-device OCR, structures notices into deadline, action, amount and child, and checks picture-only photos with the vision model. After one confirmation it creates albums and a digest file; tagged photos are skipped next time.</p></section>
 <section class="q"><h2>4. Main user flow</h2>
-<p class="answer">"Sort out this week's school papers" &rarr; confirm folder, period, children &rarr; OCR and vision per photo &rarr; preview of deadlines, events, artwork and planned creations &rarr; approve &rarr; albums, digest, tags &rarr; report with the next due item and source file names.</p></section>
-<svg viewBox="0 0 760 74" role="img" aria-label="Flow: photos on NAS, OCR and vision, structured items, confirm, then albums, digest and tags">
+<p class="answer">"Sort out this week's school papers" &rarr; confirm folder, period, children &rarr; OCR and vision &rarr; preview &rarr; approve &rarr; albums, digest, tags &rarr; report with next due item and source file names.</p></section>
+<svg viewBox="0 0 760 40" role="img" aria-label="Flow: photos on NAS, OCR and vision, structured items, confirm, then albums, digest and tags">
   <defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#3b4fd8"/></marker></defs>
-  <g font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="11" text-anchor="middle" fill="#1c2230">
-    <rect x="2" y="12" width="118" height="46" rx="8" fill="#eef2ff" stroke="#3b4fd8"/>
-    <text x="61" y="32">Photos on NAS</text><text x="61" y="47" font-size="9.5" fill="#4a5368">phone backup folder</text>
-    <rect x="160" y="12" width="118" height="46" rx="8" fill="#eef2ff" stroke="#3b4fd8"/>
-    <text x="219" y="32">OCR / vision</text><text x="219" y="47" font-size="9.5" fill="#4a5368">built-in NAS models</text>
-    <rect x="318" y="12" width="118" height="46" rx="8" fill="#eef2ff" stroke="#3b4fd8"/>
-    <text x="377" y="32">Structured items</text><text x="377" y="47" font-size="9.5" fill="#4a5368">date, action, child</text>
-    <rect x="476" y="12" width="104" height="46" rx="8" fill="#fff6dc" stroke="#b27b00"/>
-    <text x="528" y="32">Confirm</text><text x="528" y="47" font-size="9.5" fill="#4a5368">preview, approve</text>
-    <rect x="620" y="2" width="138" height="66" rx="8" fill="#e6f7ec" stroke="#1d8a4a"/>
-    <text x="689" y="25">Albums</text><text x="689" y="40">Digest file</text><text x="689" y="55">Done tags</text>
+  <g font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="12" text-anchor="middle" fill="#1c2230">
+    <rect x="2" y="4" width="118" height="32" rx="8" fill="#eef2ff" stroke="#3b4fd8"/><text x="61" y="25">Photos</text>
+    <rect x="160" y="4" width="118" height="32" rx="8" fill="#eef2ff" stroke="#3b4fd8"/><text x="219" y="25">OCR / vision</text>
+    <rect x="318" y="4" width="118" height="32" rx="8" fill="#eef2ff" stroke="#3b4fd8"/><text x="377" y="25">Items</text>
+    <rect x="476" y="4" width="104" height="32" rx="8" fill="#fff6dc" stroke="#b27b00"/><text x="528" y="25">Confirm</text>
+    <rect x="620" y="4" width="138" height="32" rx="8" fill="#e6f7ec" stroke="#1d8a4a"/><text x="689" y="25">Albums, digest</text>
     <g stroke="#3b4fd8" stroke-width="1.6" marker-end="url(#a)">
-      <line x1="122" y1="35" x2="157" y2="35"/><line x1="280" y1="35" x2="315" y2="35"/>
-      <line x1="438" y1="35" x2="473" y2="35"/><line x1="582" y1="35" x2="617" y2="35"/>
+      <line x1="122" y1="20" x2="157" y2="20"/><line x1="280" y1="20" x2="315" y2="20"/>
+      <line x1="438" y1="20" x2="473" y2="20"/><line x1="582" y1="20" x2="617" y2="20"/>
     </g>
   </g>
 </svg>
 <section class="q"><h2>5. Differentiation</h2>
-<p class="answer">Album tools organize pictures; Fridge Door turns pictures into actions with dates. It attributes artwork by reading the child's name written on it, translates notice summaries for non-native parents, and uses NAS file tags as run memory. Nothing leaves the NAS.</p></section>
+<p class="answer">Album tools organize pictures; Fridge Door turns them into dated actions. It attributes artwork by the child's written name, translates summaries for non-native parents, and uses NAS file tags as run memory. Nothing leaves the NAS.</p></section>
 </div><aside>
 <section class="q"><h2>6. NAS features used</h2>
-<table class="answer"><thead><tr><th>Step</th><th>Command</th><th>Expert</th></tr></thead><tbody><tr><td>1</td><td><code>ug-filesystem find</code></td><td>file-agent</td></tr><tr><td>2, 9</td><td><code>ug-filemgr</code> tag lookup, tag-add-file</td><td>file-agent</td></tr><tr><td>3&ndash;4</td><td><code>ug-photo vision-ocr</code>, <code>vision-vlm</code></td><td>photo-agent</td></tr><tr><td>5</td><td><code>ug-document</code> writing, <code>translate --content</code></td><td>document-agent</td></tr><tr><td>7</td><td><code>ug-photo create-album</code></td><td>photo-agent</td></tr><tr><td>8</td><td><code>ug-knowledge save-text</code></td><td>knowledge-agent</td></tr></tbody></table></section>
+<p class="answer"><code>ug-filesystem find</code>, <code>ug-filemgr</code> tags; <code>ug-photo vision-ocr</code>, <code>vision-vlm</code>, <code>create-album</code>; <code>ug-document</code> translate; <code>ug-knowledge save-text</code>.</p></section>
 <section class="q"><h2>7. Technical approach</h2>
-<p class="answer">A Markdown orchestration Skill: the parent issues only <code>delegate</code> commands to four registered experts in fixed order, passing only real upstream results. Originals are only read, except an optional archive step, off by default, run on explicit request. Other writes are albums, one digest file and a tag, each after confirmation and platform approval. Only built-in NAS models; no external services or keys. All five delegation states, empty and partial results are handled; runs are capped at 12 photos.</p></section>
+<p class="answer">A Markdown orchestration Skill: the parent issues only <code>delegate</code> commands to four registered experts in fixed order, passing only real upstream results. Originals are only read unless archiving is requested. Albums, one digest file and a tag are written after confirmation and platform approval. Built-in models only; no keys. All five delegation states and empty or partial results are handled; 12 photos per run.</p></section>
 </aside></div>
 <section class="q"><h2>8. Progress</h2>
-<p class="answer">Built: complete Skill package passing a local port of the official checker rules with zero errors and warnings; 123 automated tests with dry runs on simulated expert answers; a 16-photo invented test kit specification. Needs NAS testing: OCR on Korean and English print, vision on drawings, album creation from file paths, approval wording.</p></section>
+<p class="answer">Checkable now: 123 automated tests with dry runs on simulated expert answers; zero errors and warnings from a local port of the official checker rules; a 16-photo invented test kit with expected results. Not yet run on a NAS: OCR on Korean print, vision on drawings, album creation.</p></section>
 <section class="q box"><h2>9. Finalist test plan</h2>
-<p class="answer">Core 1: eight notices yield six deadlines in date order, one flagged past, plus two events, each citing its photo. Core 2: six drawings yield per-child albums, two assigned from names read on them, the rest by the parent's answer; a second run skips all thirteen handled photos. Edge: a blurred drawing and a receipt are reported as unreadable and unrelated; nothing is invented or created before confirmation.</p></section>
+<p class="answer">Core 1: eight notices yield six deadlines in date order, one flagged past, plus two events, each citing its photo. Core 2: six drawings yield per-child albums; a second run skips all thirteen handled photos. Edge: a blurred drawing and a receipt are reported, not handled; nothing is created before confirmation.</p></section>
 <section class="q"><h2>10. Limits, risks, dependencies</h2>
-<p class="answer">Images only; handwritten notices and poor light reduce OCR quality and are reported, not guessed. Twelve photos per run. Child attribution needs the name on the artwork or the parent's answer. Depends entirely on built-in NAS experts; translation quality follows the on-device model.</p></section>
+<p class="answer">Images only; handwriting and poor light reduce OCR quality and are reported, not guessed. Twelve photos per run. Attribution needs the name on the artwork or the parent's answer. Depends on built-in NAS experts.</p></section>
 <footer>
-  <p><b>Team:</b> individual.</p>
-  <p><b>Third-party components:</b> none. Only the OCR, vision, document and translation models built into the NAS; no external service or API key.</p>
-  <p><b>AI tools disclosure:</b> Claude Code (Anthropic) helped draft the Skill text, this proposal and the static checks; UGREEN uliya-skill-kit 0.7.3 was used as the capability reference and the source of the static checker rules. All text was reviewed by the author.</p>
+  <p><b>Team:</b> individual. <b>Third-party components:</b> none. <b>AI tools:</b> Claude Code (Anthropic) helped draft the Skill, proposal and checks; uliya-skill-kit 0.7.3 was the reference.</p>
   <div class="sig"><span>Name: ____________________</span><span>Signature: ____________________</span><span>Date: 2026-11-__</span></div>
 </footer>
 </body>

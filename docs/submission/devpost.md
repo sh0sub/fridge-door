@@ -53,11 +53,10 @@ Because there is no NAS available before Round 2, we built a Python checker (a p
 - **Keeping it small enough to be reliable.** One folder, 12 photos, images only per run. Larger jobs become shorter periods.
 
 ## Accomplishments that we're proud of
-- A complete Skill package that passes our local static check with 0 errors and 0 warnings.
+- Checkable evidence first: 123 automated tests, a local port of the official checker rules with 0 errors and 0 warnings, and a 16-photo test kit with expected results.
 - A fixed, readable digest where every to-do points back to its source photo.
 - Run memory without a database: the NAS file tag `fridge-door-done` is the only state, so a second run skips everything already handled.
 - A 16-photo invented test kit specified for the device test: 8 notices (5 Korean, 3 English, 1 past-dated), 6 drawings (2 with a child's name written on them, 1 deliberately blurred), 1 receipt and 1 screenshot. Expected result: 6 deadlines (1 past) and 2 events from the notices, and a second run that skips all 13 handled photos while the receipt, the screenshot and the blurred drawing are reported, not handled.
-- 123 automated tests.
 
 ## What we learned
 - On a NAS Skill, the best prompt is a boring one: fixed steps, quoted values, one delegate per line, and a rule for every state the expert can return.
@@ -66,9 +65,8 @@ Because there is no NAS available before Round 2, we built a Python checker (a p
 - Writing the failure paths (declined approval, empty period, blurred photo) first made the happy path shorter.
 
 ## What's next
-- Round 2: run the Skill on the assigned NAS and replace the simulated expert answers with real ones, tuning the wording of approval prompts, OCR handling on Korean and English print, vision captions on drawings and album creation from file paths.
-- Based on what the device shows, widen the 12-photo cap and handle more kinds of notices.
-- A user walkthrough of the README by another parent to tighten the wording (planned v0.9.0).
+- Round 2 plan, three device tests from `references/test-plan.md`: (1) OCR on the 8 test notices, Korean and English print, expecting 6 deadlines in date order with 1 flagged past and 2 events; (2) vision and `create-album` on the 6 drawings, expecting per-child albums with 2 assigned from the written name; (3) a second run that must skip all 13 handled photos while the receipt, the screenshot and the blurred drawing are reported.
+- Replace the simulated expert answers with the real ones and tune the approval wording to what the device shows.
 
 ## Built with
 UGREEN AI NAS (Uliya Skills), UGOS Skill Creation Tool (uliya-skill-kit 0.7.3), Markdown, UGREEN Photos, NAS built-in OCR, vision, document and translation models, Python (checker, ZIP builder and dry-run harness only; not part of the Skill), pytest, Claude Code
@@ -77,7 +75,7 @@ UGREEN AI NAS (Uliya Skills), UGOS Skill Creation Tool (uliya-skill-kit 0.7.3), 
 - Skill package: `fridge-door.zip` (one folder `fridge-door/` with `SKILL.md` and `references/`), uploaded with this submission.
 - In UGOS, open the Uliya Skills page, upload the ZIP, then say "Fridge Door, sort out this week's school papers."
 - Source: https://github.com/sh0sub/fridge-door (MIT) [PRIVATE REPO: make public or remove this line before submitting]
-- Not yet run on a NAS (Round 1 needs no device).
+- Checkable evidence: 123 automated tests (`pytest`), a static check with 0 errors and 0 warnings, and the 16-photo test kit with expected results in `references/test-plan.md`. Gallery cards are simulated dry-run output, not device screenshots; the device run is the Round 2 plan above.
 
 ---
 

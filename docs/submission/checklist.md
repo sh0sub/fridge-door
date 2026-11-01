@@ -17,7 +17,7 @@
 | 로컬 검사 `scripts/check.py fridge-door --summary` | 완료 | 0 error, 0 warning (2026-10-31) |
 | ZIP ≤10 MB, 파일 ≤100, 파일당 ≤1 MB | 완료 | 15,854바이트, 5개 파일, 최대 20,074바이트(SKILL.md) |
 | ZIP 빌드 (`dist/fridge-door.zip`) | 완료 | `python3 -m scripts.build_zip`. 최종 제출 직전(11/13) 재빌드 필요 |
-| 공식 `check-skill.mjs` 0 error | 남음-Claude | 공식 키트가 이 환경에 없음. 2026-10-27 공식 실행 기록(docs/checks)이 있으나 이후 `references/test-plan.md`가 바뀌어(해시 불일치) 기록이 낡음. 키트를 받아 사용자가 설치한 뒤 재실행하고 docs/checks를 갱신해야 함 |
+| 공식 `check-skill.mjs` 0 error | 남음-Claude | 공식 키트가 이 환경에 없음. 2026-10-27 공식 실행 기록(docs/checks)이 있으나 이후 `references/test-plan.md`가 바뀌어(해시 불일치) 기록이 낡음. 2026-11-01 키트 0.7.3(37,575 B)는 다시 받았으나 내려받은 스크립트 실행이 권한 시스템에서 거부되어 실행 못 함. 사용자가 `node uliya-skill-kit/scripts/check-skill.mjs fridge-door`를 실행하거나 실행을 허용하면 결과·해시로 docs/checks를 갱신하고 ZIP을 다시 빌드. 그 전까지 문서는 "local port"로만 표기 |
 | v0.9.0 문구 점검(README만 보고 흐름 설명 가능한지 지인 1명 확인) | 남음-사용자 계정 필요 | 지인 확인은 사용자가 해야 함. 반영은 Claude |
 | 11/12–11/13 최종 재검사(검사·빌드·테스트 재실행) | 남음-Claude | #31 |
 
@@ -25,8 +25,8 @@
 
 | 항목 | 상태 | 근거·메모 |
 |---|---|---|
-| 제안서 PDF 생성 (`docs/proposal/proposal.pdf`) | 완료 | 125,834바이트 (≤1 MB) |
-| 10항목 실질 답변 ≤500단어 | 완료 | 자동 카운트 489단어 |
+| 제안서 PDF 생성 (`docs/proposal/proposal.pdf`) | 완료 | 90,908바이트 (≤1 MB) |
+| 제안서 전체 페이지(항목 제목·SVG·푸터·서명줄 포함) ≤500단어 | 완료 | `scripts/count_proposal_words.py`: 전체 484단어, 답변 10개만 400단어. 공식 규정 원문은 "영어 ≤500단어"뿐이라 가장 넓은 기준(전체 페이지)으로 맞춤 |
 | 제3자 구성요소·AI 도구 명시 | 완료 | 제안서 하단 |
 | 제안서 문구 "local port of the official checker rules" | 완료 | 공식 키트 미설치라 "official checker 통과" 대신 로컬 포트로 표기(사실과 일치). 공식 재실행은 키트 확보 시 선택 |
 | 이름·서명·날짜(`Date: 2026-11-__`) | 남음-사용자 계정 필요 | 사용자 본인 서명·날짜. 기입 후 PDF 재생성은 Claude 가능 |
@@ -39,7 +39,7 @@
 |---|---|---|
 | 영어 스토리(항목별 붙여넣기용) | 완료 | `docs/submission/devpost.md` |
 | 썸네일 1200×800 | 완료 | `docs/submission/gallery/thumbnail.png` |
-| 갤러리 2장 이상 | 완료 | 5장(`00-chat`~`04-privacy`, 1500×1000). `00-chat`은 채팅 미리보기·완료 카드 |
+| 갤러리 2장 이상 | 완료 | 5장(`00-chat`~`04-privacy`, 1500×1000). `00-chat`·`02-digest`는 제목 옆에 "Simulated dry run, not a device screenshot" 표기, 카드 날짜는 2026-11-23~12-12 샘플 |
 | 라이선스(MIT)·AI 도구(Claude Code, UGOS Skill Creation Tool 0.7.3)·제3자 none 공개문 | 완료 | devpost.md 하단 |
 | 저장소 공개 여부 결정 | 남음-사용자 계정 필요 | `sh0sub/fridge-door`가 현재 비공개. 공개하거나 devpost.md "Try it out"의 저장소 줄 삭제 |
 | 트랙 선택(Bring Memories to Life) | 남음-사용자 계정 필요 | Devpost 폼 |

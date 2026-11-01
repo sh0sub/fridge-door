@@ -34,7 +34,7 @@ Evidence: scripts/check.py (0 error, 0 warning), pytest 115 passed, ruff and myp
 | S3-meta | mockup S3 | Meta line "7 photos read, generated on NAS timestamp", past mark | match (round 1) | digest-format.md meta line and `⚠` prefix replace "past"; dryrun digest; test_digest_meta_line_and_past_warning_prefix. At a glance and merged Not processed stay (docs/plan.md:513) |
 | S4 | mockup S4 | Album grows 2 to 5 on rerun | match (spec) | Steps 6-7 add-to-existing; real UI only Round 2 |
 | S4-img | mockup S4 | Photos app screenshot | blocked | needs real NAS (Round 2) |
-| S5-pdf | mockup S5 | 1 page A4, 10 items, under 500 words, under 1 MB | match | PDF 126 KB, 489 words, 1 page |
+| S5-pdf | mockup S5 | 1 page A4, 10 items, under 500 words, under 1 MB | match | PDF 91 KB, 484 words whole page (400 in the answers), 1 page |
 | S5-layout | mockup S5 | Two columns 62/38 with NAS features table and test plan box | match | Two columns 62/38, NAS features table, boxed test plan; 1 page (R2 fix-r2/proposal.pdf.png) |
 | S5-sign | mockup S5 | Name, signature, date, word count in footer | blocked | Name and signature are user input (checklist) |
 | S5-claim | mockup S5 / 09 | "official static checker" claim true | gap | official check-skill.mjs not installed; docs/checks record is stale after test-plan.md change |
