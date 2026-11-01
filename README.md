@@ -10,7 +10,7 @@ Built for the UGREEN Hackathon 2026 on AI NAS (Round 1 deadline 2026-11-16 KST).
 
 ## Status
 
-Skill package v0.7 drafted (2026-10-27): `fridge-door/SKILL.md` plus four references. Passes the local static check with 0 errors and 0 warnings. Not yet run on a NAS (Round 2).
+Round 1 package ready (checked 2026-11-01): `fridge-door/SKILL.md` plus four references, zipped to `dist/fridge-door.zip` (5 files, 15,854 bytes). Passes the local static check with 0 errors and 0 warnings, and 123 automated tests pass. The one-page proposal (`docs/proposal/proposal.pdf`, 489 words) and Devpost copy (`docs/submission/devpost.md`) match this package. No video is required for Round 1. Not yet run on a NAS (Round 2).
 
 ## Layout
 
