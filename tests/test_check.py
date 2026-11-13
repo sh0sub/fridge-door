@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import json
+import os
 from pathlib import Path
 from typing import Any
 
 import pytest
 
-from scripts.check import check_skill, main
+from scripts.check import CATALOG_VERSION, FULL_PROFILE_CLI_AGENTS, check_skill, main, validate_catalog
 
 MINIMAL = """---
 name: demo-skill
@@ -191,9 +193,12 @@ def test_plan_value_lint(tmp_path: Path) -> None:
 
 
 def test_plan_quote_escape(tmp_path: Path) -> None:
-    ok = MINIMAL.replace("List image files", "List the child'\\''s image files")
+    ok = MINIMAL.replace("List image files", "List the child'\"'\"'s image files")
     assert "PLAN_QUOTE_UNESCAPED" not in codes(check_skill(make_skill(tmp_path, ok)))
     assert "DELEGATE_FORMAT_INVALID" not in codes(check_skill(make_skill(tmp_path / "o", ok)))
+    # check-lib.mjs 0.7.7 only knows the '"'"' sequence; '\'' cuts its instruction short, so the plan layer rejects it
+    old = MINIMAL.replace("List image files", "List the child'\\''s image files")
+    assert "PLAN_QUOTE_UNESCAPED" in codes(check_skill(make_skill(tmp_path / "q", old)), "error")
 
 
 def test_plan_vague_reference(tmp_path: Path) -> None:
@@ -212,3 +217,86 @@ def test_cli_exit_codes(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> N
     bad = make_skill(tmp_path / "b", MINIMAL.replace(" and waiting_approval", ""))
     assert main([str(bad), "--official"]) == 1
     assert "not-uploadable" in capsys.readouterr().out
+
+
+# ---- capability catalog (kit 0.7.7, structure 2.2.0) ----------------------
+
+def synthetic_catalog(tmp_path: Path, version: str = "2.2.0", clis: list[dict[str, str]] | None = None) -> Path:
+    """A minimal stand-in with the same CLI -> agent ownership; the kit's catalog itself is not copied here."""
+    path = tmp_path / "catalog.json"
+    items = clis if clis is not None else [{"name": n, "agent": a} for n, a in FULL_PROFILE_CLI_AGENTS.items()]
+    path.write_text(json.dumps({"catalogVersion": version, "clis": items}), encoding="utf-8")
+    return path
+
+
+def test_catalog_version_is_220(tmp_path: Path) -> None:
+    assert CATALOG_VERSION == "2.2.0"
+    result = check_skill(make_skill(tmp_path), plan=False, catalog=synthetic_catalog(tmp_path))
+    assert result["catalog"] == {"checkedVersion": "2.2.0"} and result["status"] == "static-pass"
+    assert check_skill(make_skill(tmp_path / "n"), plan=False)["catalog"] == {"checkedVersion": "2.2.0"}
+
+
+@pytest.mark.parametrize("version,clis,message", [
+    ("2.0.0", None, "version must be 2.2.0"),
+    ("2.2.0", [{"name": "ug-photo", "agent": "photo-agent"}], "incomplete"),
+    ("2.2.0", [{"name": "ug-photo", "agent": "file-agent"}], "invalid full-profile CLI ownership mapping"),
+    ("2.2.0", [{"name": "ug-photo", "agent": "ghost-agent"}], "unsupported full-profile subagent"),
+    ("2.2.0", [{"name": "ug-photo"}], "invalid CLI ownership contract"),
+    ("2.2.0", [{"name": "ug-photo", "agent": "photo-agent"}] * 2, "duplicate CLI names"),
+])
+def test_catalog_contract_errors(tmp_path: Path, version: str, clis: list[dict[str, str]] | None, message: str) -> None:
+    with pytest.raises(ValueError, match=message):
+        validate_catalog(synthetic_catalog(tmp_path, version, clis))
+
+
+def test_catalog_error_exit_code_2(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    assert main([str(make_skill(tmp_path)), "--catalog", str(synthetic_catalog(tmp_path, "2.0.0"))]) == 2
+    assert "version must be 2.2.0" in capsys.readouterr().err
+
+
+def test_file_workflow_evidence_line(tmp_path: Path) -> None:
+    text = MINIMAL.replace("- `ug-filesystem` → `file-agent`", "- `ug-filesystem` → `file-agent`\n- `file-workflow` → `file-agent`")
+    result = check_skill(make_skill(tmp_path, text), plan=False, catalog=synthetic_catalog(tmp_path))
+    assert result["status"] == "static-pass"
+    bad = MINIMAL.replace("- `ug-filesystem` → `file-agent`", "- `ug-filesystem` → `file-agent`\n- `file-workflow` → `photo-agent`")
+    assert "CAPABILITY_EVIDENCE_AGENT_MISMATCH" in codes(official(make_skill(tmp_path / "b", bad)), "error")
+
+
+@pytest.mark.skipif(not os.environ.get("FRIDGE_DOOR_KIT_CATALOG"), reason="set FRIDGE_DOOR_KIT_CATALOG to the kit's data/capability-catalog.json")
+def test_real_kit_catalog_validates() -> None:
+    from tests.skill_helpers import SKILL_DIR
+
+    result = check_skill(SKILL_DIR, catalog=Path(os.environ["FRIDGE_DOOR_KIT_CATALOG"]))
+    assert result["status"] == "static-pass" and result["diagnostics"] == []
+
+
+# ---- JS whitespace (check-lib.mjs regexes see NBSP, U+2000-U+200A, U+3000 and BOM as \s) ----
+
+@pytest.mark.parametrize("space", [" ", " ", "　", " ", "﻿"])
+def test_unicode_space_counts_as_whitespace_like_js(tmp_path: Path, space: str) -> None:
+    # a direct file command hidden behind a non-ASCII space is still caught
+    root = make_skill(tmp_path, MINIMAL.replace("List new photos.", f"List new photos. Then run cat{space}notes.txt."))
+    assert "SECURITY_DIRECT_FILE_ACCESS" in codes(official(root), "error")
+    # an evidence line written with a non-ASCII space still counts as evidence
+    spaced = MINIMAL.replace("- `ug-filesystem` → `file-agent`", f"-{space}`ug-filesystem`{space}→{space}`file-agent`")
+    assert official(make_skill(tmp_path / "e", spaced))["status"] == "static-pass"
+
+
+def test_unicode_space_before_extra_flag_is_rejected(tmp_path: Path) -> None:
+    bad = MINIMAL.replace("--target file-agent --instruction", "--target file-agent --verbose --instruction")
+    assert "DELEGATE_FORMAT_INVALID" in codes(official(make_skill(tmp_path, bad)), "error")
+
+
+def test_js_pattern_keeps_any_char_class_and_ascii_word_boundaries() -> None:
+    import re
+
+    from scripts.check import JS_WHITESPACE_CHARS, js_pattern, js_re, js_trim
+
+    assert js_re(r"^\s+$").match("　  \t") and not js_re(r"^\s+$").match("\x1c")  # \x1c is \s in Python, not in JS
+    assert js_re(r"^\S+$").match("a\x85b")  # NEL is not JS whitespace
+    assert js_re(r"[\s\S]+", re.S).fullmatch("a\nb　c")
+    assert js_re(r"\bcat\b", re.ASCII).search("écat")  # ASCII \b like JS without the u flag: é is not a word character
+    assert js_pattern(r"[^)\s]") == "[^)" + js_pattern(r"\s")[1:-1] + "]"
+    assert js_trim("﻿ value　") == "value" and "\x85" not in JS_WHITESPACE_CHARS
+    with pytest.raises(ValueError):
+        js_pattern(r"[a\S]")

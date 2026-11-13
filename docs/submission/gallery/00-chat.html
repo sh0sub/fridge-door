@@ -1,71 +1,73 @@
 <!doctype html><meta charset="utf-8"><title>chat</title><link rel="stylesheet" href="base.css">
 <style>
-.wrap{display:flex;gap:32px;flex:1;min-height:0;margin-top:-10px;margin-bottom:14px}
-.col{flex:1;display:flex;flex-direction:column;gap:12px;min-width:0}
-.cap{font-size:20px;font-weight:700;color:var(--blue);letter-spacing:.04em}
-.user{align-self:flex-end;background:var(--blue);color:#fff;border-radius:16px 16px 4px 16px;padding:9px 16px;font-size:19px}
+body{padding:44px 60px 40px}
+h1{font-size:46px;margin:6px 0 6px}
+.lead{font-size:22px;margin:0 0 10px}
+.wrap{display:flex;gap:28px;flex:1;min-height:0;margin-bottom:24px}
+.col{display:flex;flex-direction:column;gap:9px;min-width:0}
+.col.a{flex:1.2}.col.b{flex:1}
+.cap{font-size:18px;font-weight:700;color:var(--blue);letter-spacing:.04em}
+.user{align-self:flex-end;background:var(--blue);color:#fff;border-radius:16px 16px 4px 16px;padding:7px 16px;font-size:18px}
 .sys{font-size:16px;color:var(--mute);text-align:center}
-.bot{padding:12px 20px;font-size:16px;line-height:1.3;flex:1}
-.bot .head{font-weight:700;font-size:19px;margin-bottom:6px}
-.strip{display:flex;gap:10px;margin:6px 0 8px}
-.strip div{flex:1;background:var(--canvas);border-radius:10px;padding:5px 10px;font-size:15px;color:var(--mute)}
-.strip b{display:block;font-size:26px;color:var(--ink)}
-.warn{background:#fff6dc;border:1px solid var(--amber);border-radius:8px;padding:5px 10px;font-size:15px;margin-bottom:6px}
-.g{font-weight:700;margin:7px 0 2px}
-.r{display:flex;gap:8px;align-items:baseline;border-top:1px solid #e6ebfb;padding:2px 0}
-.r .f{font-family:Menlo,monospace;font-size:13px;color:var(--mute);width:96px;flex:none}
+.bot{padding:10px 20px;font-size:17px;line-height:1.3;flex:1}
+.bot .head{font-weight:700;font-size:20px;margin-bottom:4px}
+.line{color:var(--mute);margin:1px 0}
+.g{font-weight:700;margin:6px 0 1px}
+.r{display:flex;gap:8px;align-items:baseline;border-top:1px solid #e6ebfb;padding:1px 0}
+.r .f{font-family:Menlo,monospace;font-size:14px;color:var(--mute);width:106px;flex:none}
 .r .t{flex:1}
-.pill{border-radius:99px;padding:0 9px;font-size:13px;font-weight:700;white-space:nowrap}
-.red{background:#fde8e8;color:#a32020}.yel{background:#fff0c2;color:#7a5400}
-.note{font-size:15px;color:var(--mute);margin-top:6px}
-.next{background:#fff6dc;border:1px solid var(--amber);border-radius:10px;padding:8px 12px;margin:8px 0}
-.next .d{color:#a32020;font-weight:700}
-.done{color:var(--green);font-weight:700}
 .mono{font-family:Menlo,monospace;font-size:14px;color:var(--mute)}
-.stat{margin-top:8px;font-size:14px;color:var(--mute);background:#f3f5fb;border-radius:8px;padding:5px 10px}
-.sim{display:inline-block;background:#fff6dc;border:2px solid #b27b00;color:#7a5400;border-radius:8px;padding:2px 12px;font-size:18px;font-weight:700;letter-spacing:.02em;vertical-align:middle;margin-left:14px}
+.note{font-size:17px;margin-top:7px;color:var(--mute);margin-top:5px}
+.next{background:#fff6dc;border:1px solid var(--amber);border-radius:10px;padding:7px 12px;margin:6px 0}
+.check{background:#fff6dc;border:1px solid var(--amber);border-radius:10px;padding:4px 12px;margin:5px 0}
+.done{color:var(--green);font-weight:700}
+.stat{margin-top:10px;font-size:16px;color:var(--mute);background:#f3f5fb;border-radius:8px;padding:5px 10px;line-height:1.35}
+.sim{display:inline-block;background:#fff6dc;border:2px solid #b27b00;color:#7a5400;border-radius:8px;padding:2px 12px;font-size:17px;font-weight:700;vertical-align:middle;margin-left:14px;letter-spacing:.02em}
 </style>
 <div class="kicker">What the parent sees in the chat <span class="sim">Simulated dry run, not a device screenshot</span></div>
-<h1>Check once, then it is done</h1>
-<p class="lead">The preview card comes before anything is written. The completion card lists only what was really created.</p>
+<h1>Preview first, then the completion card</h1>
+<p class="lead">The preview comes before anything is written. The completion card lists only what an expert returned as done.</p>
 <div class="wrap">
-<div class="col">
- <div class="cap">1 &middot; PREVIEW, BEFORE ANY WRITE <span class="sim" style="font-size:14px;margin-left:8px">simulated</span></div>
+<div class="col a">
+ <div class="cap">1 &middot; PREVIEW, BEFORE ANY WRITE</div>
  <div class="user">Sort out this week's school papers.</div>
  <div class="sys">Reading photos 7/7</div>
  <div class="card bot">
   <div class="head">7 photos read. Please check before I save anything.</div>
-  <div class="strip"><div><b>9</b>photos found</div><div><b>2</b>already done</div><div><b>7</b>to process</div></div>
-  <div class="mono">Photos/PhoneBackup &middot; 2026-11-23 to 2026-11-29</div>
-  <div class="warn" style="margin-top:6px">Check needed &middot; IMG_0107.jpg: I could not tell whose drawing this is. Which child made it?</div>
+  <div class="line">9 photos found &middot; 2 already done &middot; 7 in this batch &middot; 0 left for later</div>
+  <div class="line">Photos/PhoneBackup &middot; 2026-11-23 to 2026-11-29 (where the last digest stopped)</div>
+  <div class="check"><b>Please tell me:</b> which child made IMG_0107.jpg?</div>
   <div class="g">School notices (4)</div>
-  <div class="r"><span class="f">IMG_0104.jpg</span><span class="t">Field-trip fee &middot; Mina</span><span class="pill red">12-05 &middot; pay 12,000</span></div>
-  <div class="r"><span class="f">IMG_0102.jpg</span><span class="t">Museum consent &middot; Mina</span><span class="pill red">12-06 &middot; return</span></div>
-  <div class="r"><span class="f">IMG_0103.jpg</span><span class="t">PE item &middot; Jun</span><span class="pill red">12-09 &middot; bring</span></div>
-  <div class="r"><span class="f">IMG_0105.jpg</span><span class="t">Arts festival &middot; all</span><span class="pill yel">12-12 14:00 &middot; attend</span></div>
+  <div class="r"><span class="f">IMG_0104.jpg</span><span class="t">Field-trip fee &middot; 2026-12-04 &middot; pay KRW 12,000 &middot; Mina</span></div>
+  <div class="r"><span class="f">IMG_0102.jpg</span><span class="t">Museum consent &middot; 2026-12-05 &middot; sign and return &middot; Mina</span></div>
+  <div class="r"><span class="f">IMG_0103.jpg</span><span class="t">PE item &middot; 2026-12-08 &middot; pack a jump rope &middot; Jun</span></div>
+  <div class="r"><span class="f">IMG_0105.jpg</span><span class="t">Arts festival &middot; 2026-12-11 14:00 &middot; attend &middot; all children</span></div>
   <div class="g">Artwork (2)</div>
-  <div class="r"><span class="f">IMG_0107.jpg</span><span class="t">child to confirm &middot; paper-cup robot craft, silver and red</span></div>
   <div class="r"><span class="f">IMG_0106.jpg</span><span class="t">Mina &middot; yellow school bus under a rainbow</span></div>
+  <div class="r"><span class="f">IMG_0107.jpg</span><span class="t">unknown, please tell me &middot; paper-cup robot craft, silver and red</span></div>
+  <div class="note" style="margin-top:3px">If your child said something about a drawing, tell me and I will keep it with the picture (optional).</div>
   <div class="g">Not related / unreadable (1)</div>
-  <div class="r"><span class="f">IMG_0108.jpg</span><span class="t">receipt &middot; left untouched</span></div>
-  <div class="note"><b>Will create:</b> album School notices 2026-11 (4), album Artwork &ndash; Mina 2026 (2) &middot; <b>Will save:</b> Fridge Door &ndash; 2026-11-23 to 2026-11-29.md &middot; tag handled photos fridge-door-done</div>
-  <div class="note" style="color:var(--ink)"><b>Nothing will be moved or deleted.</b> Proceed? (yes / or correct, e.g. 'IMG_0107 is Jun's')</div>
+  <div class="r"><span class="f">IMG_0108.jpg</span><span class="t">receipt</span></div>
+  <div class="note"><b>Will copy:</b> 1 drawing into Photos/PhoneBackup/Fridge Door/Artwork - Mina (new copies, so a drawing can show twice in UGREEN Photos)</div>
+  <div class="note"><b>Will create:</b> album Artwork - Mina, which follows its keepsake folder &middot; drawings whose child you tell me are copied into that child's keepsake folder the same way</div>
+  <div class="note"><b>Will save:</b> a new digest in Photos/PhoneBackup/Fridge Door &middot; tag the 7 photos it lists fridge-door-done</div>
+  <div class="note" style="color:var(--ink)">Originals stay where they are; nothing is moved or deleted. Proceed? (yes / or correct, e.g. 'IMG_0107 is Jun's' or 'the fee is already paid')</div>
  </div>
 </div>
-<div class="col">
- <div class="cap">2 &middot; COMPLETION, ONLY REAL RESULTS <span class="sim" style="font-size:14px;margin-left:8px">simulated</span></div>
- <div class="user">Yes, go ahead.</div>
- <div class="sys">2 album approvals and 1 file approval (waiting_approval &rarr; completed)</div>
+<div class="col b">
+ <div class="cap">2 &middot; COMPLETION, ONLY REAL RESULTS</div>
+ <div class="user">IMG_0107 is Mina's. Mina said of the bus: "This is our school bus. It goes to the rainbow!" Yes, go ahead.</div>
+ <div class="sys">The words are kept as typed, with IMG_0106 in the digest. Then NAS approvals for the copies, albums, digest and tag</div>
  <div class="card bot">
   <div class="head"><span class="done">&#10003;</span> Done. 3 deadlines, 1 event, 2 artworks.</div>
-  <div class="next"><b>Next due</b> &middot; <span class="d">2026-12-05</span> &middot; field-trip fee &middot; KRW 12,000 &middot; Mina &middot; <span class="mono">IMG_0104.jpg</span></div>
+  <div class="next"><b>Next due:</b> 2026-12-04 &middot; Pay the field-trip fee, KRW 12,000 &middot; Mina &middot; <span class="mono">IMG_0104.jpg</span></div>
   <div class="g">Created</div>
-  <div class="r"><span class="t">Album 'School notices 2026-11' &middot; 4 photos</span><span class="mono">id a1f0c2d4-0001</span></div>
-  <div class="r"><span class="t">Album 'Artwork &ndash; Mina 2026' &middot; 2 photos</span><span class="mono">id a1f0c2d4-0002</span></div>
-  <div class="r"><span class="t">Saved digest &middot; <span class="mono">Photos/PhoneBackup/Fridge Door/Fridge Door &ndash; 2026-11-23 to 2026-11-29.md</span></span></div>
-  <div class="r"><span class="t">Tagged 6 photos <span class="mono">fridge-door-done</span></span></div>
-  <div class="stat">Skipped 1 (receipt) &middot; 2 already done &middot; Unreadable 0 &middot; Nothing moved or deleted &middot; All processing stayed on this NAS</div>
+  <div class="r"><span class="t">2 copies in Photos/PhoneBackup/Fridge Door/Artwork - Mina</span></div>
+  <div class="r"><span class="t">Album 'Artwork - Mina' &middot; 2 photos &middot; <span class="mono">id a1f0c2d4-0002</span></span></div>
+  <div class="r"><span class="t">Saved digest &middot; <span class="mono">Photos/PhoneBackup/Fridge Door/fridge-door-digest_20261129_211405.md</span></span></div>
+  <div class="r"><span class="t">Tagged 7 photos fridge-door-done</span></div>
+  <div class="stat">2 already done &middot; Left untouched 1 (receipt) &middot; Unreadable 0 &middot; 0 left for later &middot; Originals were not moved or deleted &middot; This Skill asked only the NAS experts; the AI model they use is the one the NAS owner set up</div>
  </div>
 </div>
 </div>
-<div class="foot"><span>Simulated dry run, not run on a NAS. Formats: SKILL.md Steps 6 and 11; invented names, sample dates</span><span>Fridge Door &middot; UGREEN Hackathon 2026</span></div>
+<div class="foot"><span>Simulated dry run, not run on a NAS. Formats follow SKILL.md Steps 8 and 15; invented names, sample dates</span><span>Fridge Door &middot; UGREEN Hackathon 2026</span></div>

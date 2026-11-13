@@ -38,6 +38,12 @@ def test_20_plan_grep_zero_hits_everywhere() -> None:
     assert hits == []
 
 
+def test_20_no_absolute_privacy_claims() -> None:
+    for name, source in package_sources().items():
+        for phrase in ("Nothing leaves the NAS", "No data leaves", "stayed on this NAS", "Nothing is sent outside", "read entirely on"):
+            assert phrase not in source, (name, phrase)
+
+
 def test_20_frontmatter_and_description() -> None:
     text = skill_text()
     front = text.split("---")[1].strip().splitlines()
@@ -90,7 +96,16 @@ def test_22_readme_contents() -> None:
     lines = [line for line in examples.splitlines() if line.startswith("- ")]
     assert len(lines) == 6
     assert sum(bool(re.search(r"[가-힣]", line)) for line in lines) == 3  # 3 EN + 3 KO
-    assert "0.9.0" in text and "not an official UGREEN product" in text
+    assert "| 1.0.0 | 2026-11-13 |" in text and "not an official UGREEN product" in text
+    history = text.split("## Version history")[1]
+    assert "planned" not in history.lower() and "will " not in history.lower()  # no future versions in the table
+    remove = text.split("## Remove")[1].split("## ")[0]
+    for thing in ("Albums", "Keepsake folders", "Digests", "Tag"):
+        assert thing in remove, thing
+    rw = text.split("## What it reads and writes")[1].split("## Example")[0]
+    assert "| Reads |" in rw and "| Writes |" in rw and "show twice in UGREEN Photos" in rw
+    assert "including receipts and unreadable photos" in rw and "fridge-door-journal" in rw
+    assert "## Which folder to use" in text and "School" in text.split("## Which folder to use")[1].split("## ")[0]
 
 
 def test_22_digest_format_has_seven_sections_and_example() -> None:
@@ -100,23 +115,49 @@ def test_22_digest_format_has_seven_sections_and_example() -> None:
     assert len(sections) == 7
     example = text.split("## Example")[1].split("```")[1]
     assert [line[3:] for line in example.splitlines() if line.startswith("## ")] == sections
-    assert "- [ ] 2026-10-31" in example
+    assert "- [ ] 2026-12-04" in example
+    assert "School notices" not in text and "carried over from {previous digest file name}" in text
+    assert "Partly done before saving" in text and "`- [x]`" in text and "Keepsake folder" in example
+    assert "Next run starts from: {YYYY-MM-DD}" in layout and "by creation time" in text and ".en.md" in text
+    assert "Events dated on or after the run date are carried over" in text and "past events are not" in text
+    assert 'Said: "This is our school bus. It goes to the rainbow!"' in example and "School Banking" not in text
 
 
 def test_22_disclosures_contents() -> None:
     text = (SKILL_DIR / "references" / "disclosures.md").read_text(encoding="utf-8")
-    for agent, cli in (("file-agent", "ug-filesystem"), ("file-agent", "ug-filemgr"), ("photo-agent", "ug-photo"),
-                       ("document-agent", "ug-document"), ("knowledge-agent", "ug-knowledge")):
+    for agent, cli in (("file-agent", "ug-filesystem"), ("file-agent", "ug-filemgr"), ("file-agent", "file-workflow"),
+                       ("photo-agent", "ug-photo"), ("document-agent", "ug-document"), ("knowledge-agent", "ug-knowledge")):
         assert f"| {agent} | {cli} |" in text
     assert "## Third-party components\n\nNone." in text
-    assert "Claude Code" in text and "uliya-skill-kit 0.7.3" in text and "## Developed during the hackathon" in text
+    assert "Claude Code" in text and "uliya-skill-kit 0.7.7" in text and "structure 2.2.0" in text
+    assert "## Developed during the hackathon" in text and "0.7.3" not in text
+    assert "returns text only" not in text and "`create-album-condition` | state-change | workflow" in text
+    assert "| document-agent | ug-document | `qa` | read | none | Artwork journal" in text and "`ls`, `category` | read | none | Step 9" in text
+    assert "(from 2026-10-26)" in text  # first commit of the repository
 
 
 def test_22_test_plan_contents() -> None:
     text = (SKILL_DIR / "references" / "test-plan.md").read_text(encoding="utf-8")
-    for heading in ("## Timebox", "## Core 1", "## Core 2", "## Edge", "## Fallback table", "## Expected results"):
+    for heading in ("## Timebox", "## Core 1", "## Core 2", "## Edge", "## Fallback table", "## Expected results",
+                    "## Assumptions not yet checked on a device"):
         assert heading in text
     assert text.count("| 17:00 |") == 1 and "| 03:00 |" in text
+    assert "| Core 1 (batch 1) | 12 | 6 deadlines (1 past), 2 events | 2 (Mina 1, Jun 1) | 2 | 12 |" in text
+    assert "| Core 2 (batch 2), D06 unreadable | 4 | 6 deadlines and 2 events carried over, 0 new | 3 (Mina 1, Jun 2) | 0 | 4 |" in text
+    assert "| Core 2 (batch 2), D06 answered YES | 4 | 6 deadlines and 2 events carried over, 0 new | 4 (Mina 2, Jun 2) | 0 | 4 |" in text
+    assert "| Edge, refused approval (Sora, Tae) | 12 | as Core 1 | 1 (Sora) | 1 (Sora) | 11 |" in text
+    assert "| Edge, rerun same period | 0 | none (6 unticked deadlines and 2 upcoming events reported from the last digest) | 0 | 0 | 0 |" in text
+    assert "16 tagged photos, 2 albums, and 5 copies (D06 unreadable) or 6 copies (D06 YES)" in text
+    assert "UGREEN AI NAS" not in text and "(iDX6011 Pro, 64 GB)" in text
+    assumptions = text.split("## Assumptions not yet checked on a device")[1].split("## ")[0]
+    numbers = [int(line.split(".", 1)[0]) for line in assumptions.splitlines() if line[:1].isdigit()]
+    assert numbers == list(range(1, 20))  # 19 assumptions, numbered without gaps (the proposal cites the count)
+    fallback = text.split("## Fallback table")[1]
+    for problem in ("More than 60 photos and narrowing does not work", "The copy reports only counts",
+                    "Folder listing gives no path, no file id or no storage type", "Album with the same name follows another folder",
+                    "Document expert cannot read the Markdown digests for the journal"):
+        assert problem in fallback, problem
+    assert "Step 2 fallback" in fallback
 
 
 def test_22_zip_build_and_limits(tmp_path: Path) -> None:

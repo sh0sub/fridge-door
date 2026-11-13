@@ -1,46 +1,57 @@
 <!doctype html><meta charset="utf-8"><title>digest</title><link rel="stylesheet" href="base.css">
 <style>
-.wrap{display:flex;gap:36px;flex:1;min-height:0}
-.doc{flex:1.55;padding:18px 30px;font-size:19px;line-height:1.32}
-.doc h2{font-size:20px;margin:9px 0 2px;color:var(--blue)}
-.doc h3{margin:0 0 4px;font-size:27px}
+body{padding:46px 64px 40px}
+h1{font-size:46px}
+.lead{font-size:22px;margin:0 0 20px}
+.wrap{display:flex;gap:32px;flex:1;min-height:0}
+.doc{flex:1.8;padding:14px 26px;font-size:15px;line-height:1.28}
+.doc h2{font-size:17px;margin:8px 0 2px;color:var(--blue)}
+.doc h3{margin:0 0 3px;font-size:24px}
 .doc p,.doc li{margin:2px 0}
 .doc ul{list-style:none;padding:0;margin:0}
-.doc .src{color:var(--mute);font-size:15px;font-family:Menlo,monospace}
-.doc .q{color:var(--mute)}
-.side{flex:1;display:flex;flex-direction:column;gap:20px;font-size:23px;line-height:1.4}
-.side .card{padding:22px 26px}
+.doc .src{color:var(--mute);font-size:14px;font-family:Menlo,monospace}
+.doc table{border-collapse:collapse;width:100%;font-size:14px}
+.doc td,.doc th{border-top:1px solid #e6ebfb;padding:2px 6px 2px 0;text-align:left;vertical-align:top}
+.doc th{color:var(--mute);font-weight:600}
+.side{flex:1;display:flex;flex-direction:column;gap:12px;font-size:18px;line-height:1.36}
+.side .card{padding:12px 20px}
 .side b{color:var(--blue)}
-.tag{display:inline-block;background:#fde8e8;color:#a32020;border-radius:6px;padding:0 8px;font-size:17px;font-weight:700}
-.sim{display:inline-block;background:#fff6dc;border:2px solid #b27b00;color:#7a5400;border-radius:8px;padding:2px 12px;font-size:18px;font-weight:700;letter-spacing:.02em;vertical-align:middle;margin-left:14px}
+.sim{display:inline-block;background:#fff6dc;border:2px solid #b27b00;color:#7a5400;border-radius:8px;padding:2px 12px;font-size:17px;font-weight:700;vertical-align:middle;margin-left:14px;letter-spacing:.02em}
 </style>
-<div class="kicker">The weekly digest <span class="sim">Simulated dry run, not a device screenshot</span></div>
-<h1>One page. Every item cites its photo.</h1>
-<p class="lead">Sample digest in the fixed seven-section layout (simulated output; invented names, school and sample dates).</p>
-<div class="wrap" style="margin-top:-14px">
+<div class="kicker">The saved digest <span class="sim">Simulated dry run, not a device screenshot</span></div>
+<h1>One file per batch, seven fixed sections</h1>
+<p class="lead">Sample digest, shortened (simulated output; invented names, school and sample dates). Every item names its source photo.</p>
+<div class="wrap">
 <div class="card doc">
  <h3>Fridge Door &ndash; 2026-11-23 to 2026-11-29</h3>
- <p class="src">Source: Photos/PhoneBackup &middot; 7 photos read &middot; Simulated sample, 2026-11-30 21:14</p>
+ <p class="src">Source: Photos/PhoneBackup &middot; 7 photos read &middot; Generated on NAS 2026-11-29 21:14 &middot; Next run starts from: 2026-11-29</p>
  <h2>At a glance</h2>
- <ul><li>Next due: field-trip fee KRW 12,000 by 2026-12-05 <span class="src">IMG_0104.jpg</span></li>
- <li>3 deadlines (0 past), 1 event, 2 artworks (Mina 2)</li></ul>
+ <ul><li>Next due: 2026-12-04, field-trip fee KRW 12,000, Mina <span class="src">IMG_0104.jpg</span></li>
+ <li>3 deadlines (0 past), 1 event, 2 artworks (Mina 2) &middot; Albums: Artwork - Mina (created)</li></ul>
  <h2>Deadlines</h2>
  <ul>
- <li>&#9744; 2026-12-05 &mdash; Pay the field-trip fee, KRW 12,000 &middot; Mina <span class="q">&middot; &ldquo;12월 5일까지 납부&rdquo;</span> <span class="src">IMG_0104.jpg</span></li>
- <li>&#9744; 2026-12-06 &mdash; Sign and return the consent slip &middot; Mina <span class="q">&middot; &ldquo;12월 6일까지 회신&rdquo;</span> <span class="src">IMG_0102.jpg</span></li>
- <li>&#9744; 2026-12-09 &mdash; Pack a jump rope for PE &middot; Jun <span class="q">&middot; &ldquo;12월 9일 준비물: 줄넘기&rdquo;</span> <span class="src">IMG_0103.jpg</span></li></ul>
+ <li>&#9744; 2026-12-04 &mdash; Pay the field-trip fee, KRW 12,000 &middot; Mina <span class="src">IMG_0104.jpg</span></li>
+ <li>&#9744; 2026-12-05 &mdash; Sign and return the consent slip &middot; Mina <span class="src">IMG_0102.jpg</span></li>
+ <li>&#9744; 2026-12-08 &mdash; Pack a jump rope for PE &middot; Jun <span class="src">IMG_0103.jpg</span></li></ul>
  <h2>Events</h2>
- <ul><li>2026-12-12 14:00 &mdash; School arts festival, parents welcome <span class="src">IMG_0105.jpg</span></li></ul>
+ <ul><li>2026-12-11 14:00 &mdash; School arts festival &middot; all children <span class="src">IMG_0105.jpg</span></li></ul>
+ <h2>Notices</h2>
+ <table><tr><th>Source</th><th>Key line as read</th><th>Summary (written by Uliya)</th></tr>
+ <tr><td class="src">IMG_0104.jpg</td><td>현장체험학습비 12,000원을 12월 4일까지 납부해 주세요.</td><td>Field-trip fee 12,000원 due by 12월 4일.</td></tr>
+ <tr><td class="src">IMG_0103.jpg</td><td>12월 8일 체육 시간 준비물: 줄넘기</td><td>Bring a jump rope to PE on 12월 8일.</td></tr></table>
  <h2>Artwork</h2>
- <ul><li>Mina &middot; A crayon drawing of a yellow school bus under a rainbow <span class="q">(name read on the drawing: 김민아)</span> <span class="src">IMG_0106.jpg</span></li></ul>
+ <ul><li><b>Mina</b> &middot; Keepsake folder: Photos/PhoneBackup/Fridge Door/Artwork - Mina &middot; album created</li>
+ <li><span class="src">IMG_0106.jpg</span> &middot; Mina &middot; 2026-11-28 &middot; A crayon drawing of a yellow school bus under a rainbow. &middot; Said: "This is our school bus. It goes to the rainbow!" &middot; name read on the drawing: 김민아 &middot; copied</li>
+ <li><span class="src">IMG_0107.jpg</span> &middot; Mina &middot; 2026-11-28 &middot; A paper-cup robot craft, silver and red. &middot; chosen by the parent &middot; copied</li></ul>
  <h2>Needs your check</h2><p>Nothing to check this time.</p>
  <h2>Left untouched and run details</h2>
- <p>Left untouched: receipt <span class="src">IMG_0108.jpg</span> &middot; Originals were not moved or deleted.</p>
+ <p>Left untouched: IMG_0108.jpg (receipt) &middot; Already handled on earlier runs: IMG_0100.jpg, IMG_0101.jpg &middot; Run status when saved: every step before saving completed &middot; Originals were not moved or deleted.</p>
 </div>
 <div class="side">
- <div class="card"><b>Date order, past flagged.</b><br>Past items get a <span class="tag">&#9888; past</span> prefix; open items carry over from last week's digest.</div>
- <div class="card"><b>Tick it off.</b><br>Mark <code>- [x]</code> when done; the next run treats ticked lines as done.</div>
- <div class="card"><b>Your language.</b><br>Summaries are translated on the NAS when the notice is in a language you don't read; the original key line stays quoted.</div>
+ <div class="card"><b>Pick up where it stopped.</b><br>The meta line says <code>Next run starts from</code> a date. Next week's default period begins there, and only the unticked <code>- [ ]</code> lines are carried over.</div>
+ <div class="card"><b>Child's words.</b><br><code>Said: "..."</code> appears only when the parent typed it at the preview, unchanged. The art journal is built from these lines.</div>
+ <div class="card"><b>Ask about it later.</b><br>&ldquo;When is the field trip fee due?&rdquo; is answered from the newest saved digest, naming the file and the source photo. The photos are not read again.</div>
+ <div class="card"><b>Your language.</b><br>Uliya writes the one-line summaries in your language; dates, amounts and names stay as written in the notice. A translated copy of the whole digest is made only if you ask.</div>
 </div>
 </div>
-<div class="foot"><span>Layout: references/digest-format.md</span><span>Fridge Door &middot; UGREEN Hackathon 2026</span></div>
+<div class="foot"><span>Layout: references/digest-format.md (shortened here)</span><span>Fridge Door &middot; UGREEN Hackathon 2026</span></div>

@@ -4,73 +4,85 @@
 <meta charset="utf-8">
 <title>Fridge Door - Round 1 Proposal</title>
 <style>
-  @page { size: A4; margin: 12mm 15mm; }
+  @page { size: A4; margin: 11mm 14mm; }
   * { box-sizing: border-box; }
-  body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; font-size: 9.8pt; line-height: 1.34; color: #1c2230; margin: 0; }
-  header { border-bottom: 2px solid #3b4fd8; padding-bottom: 4px; margin-bottom: 6px; }
+  body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; font-size: 9.9pt; line-height: 1.38; color: #1c2230; margin: 0; }
+  header { display: flex; align-items: baseline; gap: 12px; border-bottom: 2px solid #3864ed; padding-bottom: 4px; margin-bottom: 7px; }
   h1 { font-size: 17pt; margin: 0; }
-  .sub { font-size: 9.5pt; color: #4a5368; }
-  .q { margin: 0 0 5px; break-inside: avoid; }
-  .q h2 { font-size: 10pt; margin: 0; color: #2a3bb0; }
+  .sub { font-size: 9.4pt; color: #4a5368; }
+  .q { margin: 0 0 6px; break-inside: avoid; }
+  .q h2 { font-size: 9.9pt; margin: 0 0 1px; color: #2952d8; }
   .q .answer { margin: 0; }
-  svg { display: block; margin: 6px auto 6px; width: 100%; height: auto; }
-  footer { margin-top: 8px; border-top: 1px solid #9aa3b8; padding-top: 5px; font-size: 9pt; break-inside: avoid; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols > div > .q:last-child { margin-bottom: 0; }
+  figure { margin: 7px 0 8px; }
+  svg { display: block; width: 100%; height: auto; }
+  .box { border: 1px solid #3864ed; background: #f5f7ff; border-radius: 6px; padding: 5px 8px; }
+  footer { margin-top: 10px; border-top: 1px solid #9aa3b8; padding-top: 6px; font-size: 9.2pt; break-inside: avoid; }
   footer p { margin: 0 0 2px; }
-  .sig { display: flex; gap: 24px; margin-top: 6px; }
+  .sig { display: flex; gap: 24px; margin-top: 7px; }
   .sig span { flex: 1; }
-  .cols { display: grid; grid-template-columns: 62fr 38fr; gap: 14px; }
-  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin: 2px 0 4px; }
-  th, td { border: 1px solid #c4cbe0; padding: 2px 4px; text-align: left; vertical-align: top; }
-  th { background: #eef2ff; color: #2a3bb0; }
-  .box { border: 1px solid #3b4fd8; background: #f5f7ff; border-radius: 6px; padding: 4px 8px; }
-  code { font-family: Menlo, monospace; font-size: 9pt; }
 </style>
 </head>
 <body>
 <header>
   <h1>Fridge Door</h1>
-  <div class="sub">Uliya Skill for UGREEN AI NAS &middot; Round 1 proposal</div>
+  <div class="sub">Uliya Skill for UGREEN AI NAS &middot; Round 1 proposal &middot; Track: Bring Memories to Life</div>
 </header>
 
-<div class="cols"><div class="main">
 <section class="q"><h2>1. What does your Skill do?</h2>
-<p class="answer">Fridge Door turns school-notice and children's-drawing photos on the NAS into a weekly parent to-do digest and per-child artwork albums, entirely on the device.</p></section>
-<section class="q"><h2>2. Target user and problem</h2>
-<p class="answer">Parents of kindergarten and primary-school children who photograph paper notices and artwork, then forget the photos. Illustrative estimate: two children, three notices a week, about 100 deadlines per school year, each a photo nobody reopens. Reply slips and fees get missed, especially by parents who do not read the local language.</p></section>
-<section class="q"><h2>3. Solution</h2>
-<p class="answer">Weekly, the parent asks Uliya. The Skill lists the period's photos, reads them with on-device OCR, structures notices into deadline, action, amount and child, and checks picture-only photos with the vision model. After one confirmation it creates albums and a digest file; tagged photos are skipped next time.</p></section>
-<section class="q"><h2>4. Main user flow</h2>
-<p class="answer">"Sort out this week's school papers" &rarr; confirm folder, period, children &rarr; OCR and vision &rarr; preview &rarr; approve &rarr; albums, digest, tags &rarr; report with next due item and source file names.</p></section>
-<svg viewBox="0 0 760 40" role="img" aria-label="Flow: photos on NAS, OCR and vision, structured items, confirm, then albums, digest and tags">
-  <defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#3b4fd8"/></marker></defs>
-  <g font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="12" text-anchor="middle" fill="#1c2230">
-    <rect x="2" y="4" width="118" height="32" rx="8" fill="#eef2ff" stroke="#3b4fd8"/><text x="61" y="25">Photos</text>
-    <rect x="160" y="4" width="118" height="32" rx="8" fill="#eef2ff" stroke="#3b4fd8"/><text x="219" y="25">OCR / vision</text>
-    <rect x="318" y="4" width="118" height="32" rx="8" fill="#eef2ff" stroke="#3b4fd8"/><text x="377" y="25">Items</text>
-    <rect x="476" y="4" width="104" height="32" rx="8" fill="#fff6dc" stroke="#b27b00"/><text x="528" y="25">Confirm</text>
-    <rect x="620" y="4" width="138" height="32" rx="8" fill="#e6f7ec" stroke="#1d8a4a"/><text x="689" y="25">Albums, digest</text>
-    <g stroke="#3b4fd8" stroke-width="1.6" marker-end="url(#a)">
-      <line x1="122" y1="20" x2="157" y2="20"/><line x1="280" y1="20" x2="315" y2="20"/>
-      <line x1="438" y1="20" x2="473" y2="20"/><line x1="582" y1="20" x2="617" y2="20"/>
+<p class="answer">Fridge Door reads the photos parents take of school notices and children's drawings, already backed up to the NAS, and turns them each week into a dated to-do list and a growing album per child.</p></section>
+
+<div class="cols"><div>
+<section class="q"><h2>2. Who is your target user, and what is their problem?</h2>
+<p class="answer">Parents of kindergarten and primary-school children. Reply slips and fee notices come home on paper, get photographed, sink into the camera roll, and the deadline passes. Drawings pile up with no child or date attached. It is harder still for parents who cannot read the school's language.</p></section>
+</div><div>
+<section class="q"><h2>3. What is your solution?</h2>
+<p class="answer">Each week the parent says "sort out this week's school papers". The Skill finds new photos in the phone-backup folder, reads them with the NAS's OCR and vision model, and separates notices, drawings and the rest. After one preview it saves a checklist digest and copies drawings into each child's keepsake folder.</p></section>
+</div></div>
+
+<section class="q"><h2>4. What is the main user flow?</h2>
+<p class="answer">Ask; confirm folder, children and dates; photos are read; preview; correct in plain words ("IMG_0107 is Jun's") and add what the child said; approve; report starting with the next deadline.</p></section>
+
+<figure>
+<svg viewBox="0 0 760 74" role="img" aria-label="Flow: phone backup folder, read on the NAS, preview and approval, then digest, keepsake folder with album, and tags that feed the next week">
+  <defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#3864ed"/></marker></defs>
+  <g font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle" fill="#1c2230">
+    <rect x="2" y="6" width="132" height="34" rx="8" fill="#eef2ff" stroke="#3864ed"/><text x="68" y="28">Phone backup</text>
+    <rect x="166" y="6" width="132" height="34" rx="8" fill="#eef2ff" stroke="#3864ed"/><text x="232" y="28">OCR, vision</text>
+    <rect x="330" y="6" width="132" height="34" rx="8" fill="#fff6dc" stroke="#b27b00"/><text x="396" y="28">Approve</text>
+    <rect x="494" y="6" width="264" height="34" rx="8" fill="#e6f7ec" stroke="#1d8a4a"/><text x="626" y="28">Digest, album, tag</text>
+    <g stroke="#3864ed" stroke-width="1.6" marker-end="url(#a)" fill="none">
+      <line x1="136" y1="23" x2="163" y2="23"/><line x1="300" y1="23" x2="327" y2="23"/><line x1="464" y1="23" x2="491" y2="23"/>
+      <path d="M626,42 L626,62 L232,62 L232,43"/>
     </g>
+    <rect x="352" y="52" width="154" height="20" fill="#ffffff"/><text x="429" y="67" font-size="12" fill="#2952d8">next week starts here</text>
   </g>
 </svg>
-<section class="q"><h2>5. Differentiation</h2>
-<p class="answer">Album tools organize pictures; Fridge Door turns them into dated actions. It attributes artwork by the child's written name, translates summaries for non-native parents, and uses NAS file tags as run memory. Nothing leaves the NAS.</p></section>
-</div><aside>
-<section class="q"><h2>6. NAS features used</h2>
-<p class="answer"><code>ug-filesystem find</code>, <code>ug-filemgr</code> tags; <code>ug-photo vision-ocr</code>, <code>vision-vlm</code>, <code>create-album</code>; <code>ug-document</code> translate; <code>ug-knowledge save-text</code>.</p></section>
-<section class="q"><h2>7. Technical approach</h2>
-<p class="answer">A Markdown orchestration Skill: the parent issues only <code>delegate</code> commands to four registered experts in fixed order, passing only real upstream results. Originals are only read unless archiving is requested. Albums, one digest file and a tag are written after confirmation and platform approval. Built-in models only; no keys. All five delegation states and empty or partial results are handled; 12 photos per run.</p></section>
-</aside></div>
-<section class="q"><h2>8. Progress</h2>
-<p class="answer">Checkable now: 123 automated tests with dry runs on simulated expert answers; zero errors and warnings from a local port of the official checker rules; a 16-photo invented test kit with expected results. Not yet run on a NAS: OCR on Korean print, vision on drawings, album creation.</p></section>
-<section class="q box"><h2>9. Finalist test plan</h2>
-<p class="answer">Core 1: eight notices yield six deadlines in date order, one flagged past, plus two events, each citing its photo. Core 2: six drawings yield per-child albums; a second run skips all thirteen handled photos. Edge: a blurred drawing and a receipt are reported, not handled; nothing is created before confirmation.</p></section>
-<section class="q"><h2>10. Limits, risks, dependencies</h2>
-<p class="answer">Images only; handwriting and poor light reduce OCR quality and are reported, not guessed. Twelve photos per run. Attribution needs the name on the artwork or the parent's answer. Depends on built-in NAS experts.</p></section>
+</figure>
+
+<div class="cols"><div>
+<section class="q"><h2>5. How is your idea different from existing tools or common AI solutions?</h2>
+<p class="answer">Unlike calendar apps and chat assistants that read one uploaded photo, Fridge Door remembers: tags mark handled photos, unticked deadlines carry into the next digest, and each child's album follows its folder, so new drawings appear by themselves. It works on photos your phone already backs up, with nothing to pick or upload. It also keeps what the child said about each drawing and collects it into an art journal.</p></section>
+
+<section class="q"><h2>6. Which UGREEN AI NAS features does your Skill use, and at which step?</h2>
+<p class="answer">Steps 1&ndash;3: ug-filesystem reads the last digest and lists new photos; ug-filemgr reads the done tag. Steps 4&ndash;5: ug-photo OCR and visual check. Step 9: file-workflow batch copy. Step 10: ug-photo folder-following album per child. Step 11: ug-knowledge saves the digest. Step 12: ug-filemgr tags. On request: ug-document builds the art journal.</p></section>
+
+<section class="q"><h2>7. What is your technical approach?</h2>
+<p class="answer">A Markdown Skill that only delegates to four registered experts, passing on only real results. Inputs: folder, children's names, language, period. Each write waits for the parent's yes, then the NAS approval prompt. The Skill uploads nothing: the NAS's photo expert reads photos in place, and Uliya writes summaries with the owner's configured model.</p></section>
+</div><div>
+<section class="q"><h2>8. What have you built so far? What is not built yet? What still needs testing on a NAS?</h2>
+<p class="answer">Built: the package for kit 0.7.7. Our local port of the checker rules reports no errors; 214 automated tests replay the workflow against simulated expert replies. Not built: handling tuned to real expert replies. Not yet run on a NAS: Korean and English OCR, the folder-following album, re-reading the digest, the art journal.</p></section>
+
+<section class="q box"><h2>9. How will you test your Skill if you become a Finalist?</h2>
+<p class="answer">Test kit: 16 invented photos. Core 1, first batch: eight notices give six deadlines and two events; two signed drawings go to two children's folders and albums. Core 2, "continue": three more drawings join the existing albums and open deadlines carry over. Edge: a refused approval ends as "Partly done".</p></section>
+
+<section class="q"><h2>10. What are the known limits, risks, or outside dependencies?</h2>
+<p class="answer">Images only, twelve per batch. Handwriting and poor light lower OCR quality; unreadable photos are listed, never guessed. Expert reply formats are assumed; the test plan lists nineteen assumptions and a fallback table. Depends on built-in NAS experts, photo indexing and the owner's model.</p></section>
+</div></div>
+
 <footer>
-  <p><b>Team:</b> individual. <b>Third-party components:</b> none. <b>AI tools:</b> Claude Code (Anthropic) helped draft the Skill, proposal and checks; uliya-skill-kit 0.7.3 was the reference.</p>
+  <p><b>Entrant:</b> individual. <b>Third-party components:</b> none. <b>External services and data flows:</b> the Skill calls none; text written by Uliya is processed by the model the NAS owner configured. <b>AI tools:</b> Claude Code (Anthropic) helped write and review the Skill files, the checker port, the tests and this proposal; UGOS Skill Creation Tool (uliya-skill-kit 0.7.7) was the reference. <b>Source and tests:</b> github.com/sh0sub/fridge-door (the checker there is our own Python port of the kit's check rules and is not part of the Skill package)</p>
   <div class="sig"><span>Name: ____________________</span><span>Signature: ____________________</span><span>Date: 2026-11-__</span></div>
 </footer>
 </body>

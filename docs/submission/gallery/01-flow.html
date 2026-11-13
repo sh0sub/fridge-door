@@ -8,26 +8,27 @@
 .s1,.s2,.s3{background:#fff}
 .s4{background:#fff6dc;border-color:var(--amber)}
 .s5{background:#e6f7ec;border-color:var(--green)}
-.say{margin-top:34px;padding:24px 30px;font-size:28px}
+.say{margin-top:24px;padding:22px 30px;font-size:25px}
 .say em{color:var(--blue);font-style:normal;font-weight:700}
-.notes{display:flex;gap:24px;margin-top:24px}
-.notes .card{flex:1;padding:20px 26px;font-size:23px;line-height:1.4}
+.notes{display:flex;gap:18px;margin-top:18px;margin-bottom:16px}
+.notes .card{flex:1;padding:14px 18px;font-size:18px;line-height:1.38}
 .notes b{color:var(--blue)}
 </style>
 <div class="kicker">How it works</div>
-<h1>From a forgotten photo to a dated to-do</h1>
-<p class="lead">One weekly request. Nothing is created until the parent has seen the preview and said yes.</p>
+<h1>From a photo in the backup to a dated to-do</h1>
+<p class="lead">One weekly request. Nothing is created until the parent has seen the preview and said yes, and the NAS has approved each write.</p>
 <div class="row">
- <div class="card step s1"><b>Photos on NAS</b><span>Phone backup folder, last 7 days, up to 12 images</span></div><div class="arrow">&rarr;</div>
+ <div class="card step s1"><b>Photos on NAS</b><span>Phone backup folder, from the date the last digest stopped; up to 12 images per batch</span></div><div class="arrow">&rarr;</div>
  <div class="card step s2"><b>OCR / vision</b><span>Built-in NAS models read notices and caption drawings</span></div><div class="arrow">&rarr;</div>
- <div class="card step s3"><b>Structured items</b><span>Deadline, action, amount, child, source photo</span></div><div class="arrow">&rarr;</div>
- <div class="card step s4"><b>Confirm</b><span>Preview, then parent approval and NAS approval</span></div><div class="arrow">&rarr;</div>
- <div class="card step s5"><b>Results</b><span>Albums in Photos, one digest file, done tags</span></div>
+ <div class="card step s3"><b>Structured items</b><span>Deadline, action, amount, child, source photo; open items from last week's digest</span></div><div class="arrow">&rarr;</div>
+ <div class="card step s4"><b>Confirm</b><span>Preview, the parent's yes, then the NAS approval</span></div><div class="arrow">&rarr;</div>
+ <div class="card step s5"><b>Results</b><span>Digest file, copies in keepsake folders, one album per child, done tags</span></div>
 </div>
-<div class="card say"><em>&ldquo;Sort out this week's school papers.&rdquo;</em> &rarr; confirm folder, period, children &rarr; read each photo &rarr; preview &rarr; approve &rarr; report with the next due item and every source file name.</div>
+<div class="card say"><em>&ldquo;Sort out this week's school papers.&rdquo;</em> &rarr; find the last digest &rarr; confirm folder, period, children &rarr; read each photo &rarr; preview, with a question about what the child said &rarr; approve &rarr; report with the next due item. Say &ldquo;continue&rdquo; for the next 12 photos.</div>
 <div class="notes">
- <div class="card"><b>Next week</b><br>Handled photos carry the <code>fridge-door-done</code> tag, so only new ones are read.</div>
- <div class="card"><b>When it can't read</b><br>Blurred or unreadable photos are listed by name. Nothing is guessed.</div>
- <div class="card"><b>Originals</b><br>Never renamed, moved or deleted.</div>
+ <div class="card"><b>Next week</b><br>The digest says <code>Next run starts from</code> a date, and the next run starts there. Every photo it listed carries <code>fridge-door-done</code>, so only new ones are read. Unticked boxes are carried over.</div>
+ <div class="card"><b>Child's words</b><br>At the preview you can tell it what a child said about a drawing. The words are kept as typed, next to that drawing in the digest.</div>
+ <div class="card"><b>Art journal</b><br>Ask &ldquo;Make Mina's art journal&rdquo; and it lists her Artwork lines from the saved digests in date order. Saved as a file only if you want.</div>
+ <div class="card"><b>When it can't read</b><br>Blurred photos are listed by name, not guessed. Albums follow <code>Artwork - Mina</code>. Originals stay in place unless you ask for the optional archive step.</div>
 </div>
 <div class="foot"><span>Fridge Door &middot; independent community Skill, not an official UGREEN product</span><span>UGREEN Hackathon 2026</span></div>

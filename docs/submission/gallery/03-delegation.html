@@ -1,29 +1,43 @@
 <!doctype html><meta charset="utf-8"><title>delegation</title><link rel="stylesheet" href="base.css">
 <style>
-table{border-collapse:collapse;width:100%;font-size:23px;background:#fff}
-th,td{padding:11px 16px;text-align:left;border-bottom:2px solid var(--line);vertical-align:top}
-th{background:var(--blue);color:#fff;font-size:22px;letter-spacing:.04em}
+body{padding:46px 64px 36px}
+h1{font-size:42px;margin:6px 0}
+.lead{font-size:20px;margin:0 0 12px}
+table{border-collapse:collapse;width:100%;font-size:16px;background:#fff}
+th,td{padding:5px 10px;text-align:left;border-bottom:2px solid var(--line);vertical-align:top}
+th{background:var(--blue);color:#fff;font-size:15px;letter-spacing:.03em}
 tr:last-child td{border-bottom:none}
-td.n{font-weight:800;color:var(--blue);width:80px}
-code{font-family:Menlo,monospace;font-size:22px;background:var(--canvas);padding:2px 7px;border-radius:6px}
-.w{color:var(--amber);font-weight:700}
+td.n{font-weight:800;color:var(--blue);width:76px}
+code{font-family:Menlo,monospace;font-size:14px;background:var(--canvas);padding:1px 6px;border-radius:6px}
+.w{color:#8a5d00;font-weight:700}
 .r{color:var(--mute)}
+tr.u td{background:#f3f5fb}
 .card.t{overflow:hidden;flex:none}
-.pills{display:flex;gap:14px;margin-top:22px;font-size:22px}
-.pills span{padding:8px 18px;border-radius:999px;background:#fff;border:2px solid var(--line)}
+.pills{display:flex;gap:12px;margin-top:10px;font-size:16px;flex-wrap:wrap}
+.pills span{padding:6px 16px;border-radius:999px;background:#fff;border:2px solid var(--line)}
+.sm{font-size:16px;color:var(--mute);margin:12px 0 0;line-height:1.4}
 </style>
 <div class="kicker">Expert delegation</div>
-<h1>The Skill only delegates. Four experts do the work.</h1>
-<p class="lead">Uliya issues <code>delegate</code> commands in fixed order and passes only real upstream results forward.</p>
+<h1>The Skill only delegates to four registered experts</h1>
+<p class="lead">Uliya issues <code>delegate</code> commands in fixed order and passes forward only real results. The instructions never name a CLI or action; the last two columns are the actions we expect, from the capability catalog.</p>
 <div class="card t"><table>
-<tr><th>Step</th><th>What happens</th><th>Expert agent</th><th>CLI and action</th><th>Effect</th></tr>
-<tr><td class="n">1</td><td>List the period's images</td><td>file-agent</td><td><code>ug-filesystem</code> find</td><td class="r">read</td></tr>
-<tr><td class="n">2, 9</td><td>Skip handled photos; tag new ones</td><td>file-agent</td><td><code>ug-filemgr</code> tag lookup, tag-add-file</td><td class="w">adds one tag</td></tr>
-<tr><td class="n">3&ndash;4</td><td>Read notices; caption drawings</td><td>photo-agent</td><td><code>ug-photo</code> vision-ocr, vision-vlm</td><td class="r">read</td></tr>
-<tr><td class="n">5</td><td>Condense and translate summaries</td><td>document-agent</td><td><code>ug-document</code> writing, translate</td><td class="r">returns text only</td></tr>
-<tr><td class="n">7</td><td>Create albums in Photos</td><td>photo-agent</td><td><code>ug-photo</code> create-album</td><td class="w">creates albums</td></tr>
-<tr><td class="n">8</td><td>Save the digest</td><td>knowledge-agent</td><td><code>ug-knowledge</code> save-text</td><td class="w">writes one new file</td></tr>
+<tr><th>Step</th><th>What happens</th><th>Expert</th><th>Expected CLI and action</th><th>Effect</th></tr>
+<tr><td class="n">1</td><td>Find and read the newest digest (sets the default period)</td><td>file-agent</td><td><code>ug-filesystem</code> find, cat</td><td class="r">read</td></tr>
+<tr><td class="n">2</td><td>List the period's images; optionally narrow to papers and drawings if over 60</td><td>file-agent, photo-agent</td><td><code>ug-filesystem</code> find; <code>ug-photo</code> search-picture</td><td class="r">read</td></tr>
+<tr><td class="n">3</td><td>Which photos carry the done tag; 12-photo batch</td><td>file-agent</td><td><code>ug-filemgr</code> tag lookup</td><td class="r">read</td></tr>
+<tr><td class="n">4&ndash;5</td><td>Read the text; check and caption drawings</td><td>photo-agent</td><td><code>ug-photo</code> vision-ocr, vision-vlm</td><td class="r">read</td></tr>
+<tr class="u"><td class="n">6&ndash;7</td><td>Structure notices, write summaries; carry over open items</td><td colspan="2">Uliya itself, no delegation</td><td class="r">none</td></tr>
+<tr><td class="n">8</td><td>Preview: does the child's album exist; ask what the child said</td><td>photo-agent</td><td><code>ug-photo</code> albums</td><td class="r">read</td></tr>
+<tr><td class="n">9</td><td>Check the output folder; copy drawings into keepsake folders, then list the folder</td><td>file-agent</td><td><code>ug-filesystem</code> stat, mkdir; <code>file-workflow</code> batch-transfer; <code>ug-filesystem</code> ls</td><td class="w">new copies</td></tr>
+<tr><td class="n">10</td><td>Create each album once, following its folder</td><td>photo-agent</td><td><code>ug-photo</code> create-album-condition</td><td class="w">creates an album</td></tr>
+<tr><td class="n">11</td><td>Save the digest to the real folder path from step 9</td><td>knowledge-agent</td><td><code>ug-knowledge</code> save-text</td><td class="w">one new file</td></tr>
+<tr><td class="n">12</td><td>Tag every photo the digest lists</td><td>file-agent</td><td><code>ug-filemgr</code> tag-add-file</td><td class="w">adds one tag</td></tr>
+<tr><td class="n">13</td><td>Optional, only on request: move past notices into an archive folder</td><td>file-agent</td><td><code>ug-filesystem</code> cpmv</td><td class="w">moves files</td></tr>
+<tr><td class="n">14</td><td>Optional, only on request: translated copy of the digest</td><td>document-agent</td><td><code>ug-document</code> translate</td><td class="w">one new file</td></tr>
+<tr class="u"><td class="n">15</td><td>Completion card from real results</td><td colspan="2">Uliya itself, no delegation</td><td class="r">none</td></tr>
+<tr><td class="n">Journal</td><td>On request: one child's Artwork lines from the saved digests</td><td>document-agent</td><td><code>ug-document</code> qa</td><td class="r">read</td></tr>
 </table></div>
+<p class="sm">Steps 13 and 14 are off by default. The art journal is shown in the chat; it is saved as a file (<code>ug-knowledge</code> save-text) only if the parent wants it.</p>
 <div class="pills"><span>completed</span><span>failed</span><span>waiting_approval</span><span>waiting_user</span><span>cancelled</span></div>
-<p class="lead" style="margin-top:18px;font-size:22px">All five delegation states are handled. Writes (amber) happen only after the preview, the parent's yes and the NAS approval.</p>
-<div class="foot"><span>The Skill itself never runs a CLI &middot; Markdown only, no scripts</span><span>Fridge Door &middot; UGREEN Hackathon 2026</span></div>
+<p class="sm">All five delegation states are handled. Writes (amber) happen only after the preview, the parent's yes and the NAS approval.</p>
+<div class="foot"><span>The Skill itself never runs a CLI &middot; Markdown only, no scripts &middot; Not yet run on a NAS</span><span>Fridge Door &middot; UGREEN Hackathon 2026</span></div>

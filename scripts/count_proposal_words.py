@@ -2,7 +2,7 @@
 """Count the words of the proposal answers (class="answer"), excluding question titles, footer and SVG.
 
 Usage: python3 scripts/count_proposal_words.py [docs/proposal/proposal.html]
-Also reports the whole-page count. Exits 1 when either exceeds 500.
+Exits 1 when the ten answers plus the figure labels exceed 500 words. The whole-page count is printed for information.
 """
 
 from __future__ import annotations
@@ -54,6 +54,18 @@ def whole_page(html: str) -> int:
     return len(text.split())
 
 
+def figure_words(html: str) -> int:
+    """Words of the visible text labels inside SVG figures."""
+    import re
+    from html import unescape
+
+    words = 0
+    for svg in re.findall(r"<svg.*?</svg>", html, flags=re.S):
+        for label in re.findall(r"<text[^>]*>(.*?)</text>", svg, flags=re.S):
+            words += len(unescape(re.sub(r"<[^>]+>", " ", label)).replace("\u00b7", " ").replace("+", " ").split())
+    return words
+
+
 def main(argv: list[str]) -> int:
     path = Path(argv[1]) if len(argv) > 1 else DEFAULT
     counts = count(path.read_text(encoding="utf-8"))
@@ -62,8 +74,13 @@ def main(argv: list[str]) -> int:
     total = sum(counts)
     whole = whole_page(path.read_text(encoding="utf-8"))
     print(f"answers: {len(counts)}  total words: {total} (limit {LIMIT})")
-    print(f"whole page (headings, SVG, footer, signature line): {whole} (limit {LIMIT})")
-    return 0 if len(counts) == 10 and total <= LIMIT and whole <= LIMIT else 1
+    print(f"whole page (headings, SVG, footer, signature line), for information: {whole}")
+    figure = figure_words(path.read_text(encoding="utf-8"))
+    print(f"figure labels: {figure}  answers + figure labels: {total + figure} (limit {LIMIT})")
+    # Official rule (checked 2026-11-13): the ten substantive responses must not exceed 500 English words;
+    # declarations, names, signatures and third-party licence information are excluded. Figure labels are
+    # counted with the answers to stay on the safe side; question headings and the footer are not.
+    return 0 if len(counts) == 10 and total + figure <= LIMIT else 1
 
 
 if __name__ == "__main__":

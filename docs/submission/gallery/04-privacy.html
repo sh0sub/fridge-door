@@ -1,32 +1,36 @@
 <!doctype html><meta charset="utf-8"><title>privacy</title><link rel="stylesheet" href="base.css">
 <style>
-.stage{display:flex;gap:40px;align-items:stretch;min-height:0;height:560px;margin-top:14px}
-.nas{flex:1.7;border:4px solid var(--green);border-radius:26px;background:#f3fbf6;padding:30px 36px;position:relative}
+.stage{display:flex;gap:36px;align-items:stretch;margin-top:6px}
+.nas{flex:1.6;border:4px solid var(--green);border-radius:26px;background:#f3fbf6;padding:36px 32px 28px;position:relative}
 .nas .label{position:absolute;top:-20px;left:30px;background:var(--green);color:#fff;font-weight:800;font-size:22px;padding:6px 20px;border-radius:999px}
-.nas ul{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.nas li{background:#fff;border:2px solid #b9e3c8;border-radius:14px;padding:26px 24px;font-size:28px;line-height:1.3}
-.nas li small{display:block;color:var(--mute);font-size:22px;margin-top:4px}
-.out{flex:1;border:3px dashed #c06060;border-radius:26px;background:#fff;padding:30px 32px;font-size:26px;line-height:1.5}
-.out b{display:block;font-size:30px;color:#a32020;margin-bottom:10px}
-.out s{color:var(--mute)}
-.x{font-size:110px;color:#c06060;line-height:1;text-align:center;margin-top:18px}
-.note{margin-top:34px;font-size:26px;color:var(--mute)}
+.nas ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.nas li{background:#fff;border:2px solid #b9e3c8;border-radius:14px;padding:18px 20px;font-size:24px;line-height:1.3}
+.nas li small{display:block;color:var(--mute);font-size:19px;margin-top:4px}
+.own{flex:1;border:3px solid var(--amber);border-radius:26px;background:#fffaf0;padding:36px 30px 28px;font-size:23px;line-height:1.4;position:relative}
+.own .label{position:absolute;top:-20px;left:30px;background:var(--amber);color:#fff;font-weight:800;font-size:22px;padding:6px 20px;border-radius:999px}
+.own small{display:block;color:var(--mute);font-size:19px;margin-top:10px}
+.note{margin-top:26px;font-size:23px;color:var(--mute);line-height:1.4}
+code{font-family:Menlo,monospace;font-size:.9em}
 </style>
 <div class="kicker">Privacy</div>
-<h1>Nothing leaves the NAS</h1>
-<p class="lead">Photos of your children and their school stay where your backup already lives.</p>
+<h1>Where each part of the work runs</h1>
+<p class="lead">The Skill delegates only to registered NAS experts. It calls no outside service and needs no key. One part depends on the owner's setup.</p>
 <div class="stage">
- <div class="nas"><span class="label">Inside your UGREEN NAS</span>
+ <div class="nas"><span class="label">Registered NAS experts</span>
   <ul>
-   <li>Phone-backup photos<small>read-only, never renamed or deleted</small></li>
-   <li>OCR and vision<small>built-in NAS models</small></li>
-   <li>Translation<small>built-in document model</small></li>
-   <li>Albums in UGREEN Photos<small>created only after approval</small></li>
-   <li>Digest file<small>one new Markdown file</small></li>
-   <li>Run memory<small>the <code>fridge-door-done</code> file tag, nothing else</small></li>
+   <li>Phone-backup photos<small>read only unless you ask for the optional archive step; the originals are not renamed or deleted</small></li>
+   <li>OCR and picture check<small>done by the NAS photo expert (built-in models)</small></li>
+   <li>Keepsake folders and album<small>new copies, one album per child, created after approval</small></li>
+   <li>Digest file<small>one new Markdown file per batch; a child's words are stored only if the parent types them</small></li>
+   <li>Run memory<small>the <code>fridge-door-done</code> file tag and the digests, including the &ldquo;Next run starts from&rdquo; date; nothing else</small></li>
+   <li>No downloads<small>no scripts, no API key, no outside service</small></li>
   </ul>
  </div>
- <div class="out"><b>Outside the NAS</b><s>External AI service</s><br><s>Cloud upload</s><br><s>API keys</s><br><s>Subscriptions</s><div class="x">&times;</div></div>
+ <div class="own"><span class="label">Depends on the NAS owner</span>
+  Summaries and the digest text are written by Uliya.
+  <small>They run on whichever model the owner set up for Uliya: a local model, or a cloud model the owner chose.</small>
+  <small>A translated copy of the digest and the art journal are made only if the parent asks.</small>
+ </div>
 </div>
-<p class="note">Third-party components: none. No external service is called and no key is needed.</p>
-<div class="foot"><span>All names, schools and phone numbers in examples and test material are invented</span><span>Fridge Door &middot; UGREEN Hackathon 2026</span></div>
+<p class="note">Third-party components: none. All names, schools and phone numbers in examples and test material are invented.</p>
+<div class="foot"><span>Independent community Skill, not an official UGREEN product</span><span>Fridge Door &middot; UGREEN Hackathon 2026</span></div>

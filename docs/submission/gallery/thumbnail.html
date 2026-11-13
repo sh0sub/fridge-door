@@ -1,15 +1,32 @@
 <!doctype html><meta charset="utf-8"><title>thumb</title><link rel="stylesheet" href="base.css">
 <style>
-body{width:1200px;height:800px;padding:64px 72px;justify-content:center}
-h1{font-size:128px;margin:14px 0 18px;letter-spacing:-.02em}
-.lead{font-size:36px;max-width:980px;margin:0 0 40px}
-.chips{display:flex;gap:16px}
-.chip{font-size:26px;font-weight:700;padding:12px 24px;border-radius:999px;border:2px solid var(--blue);background:#fff;color:var(--blue)}
+body{width:1200px;height:800px;padding:48px 72px 44px;justify-content:flex-start}
+h1{font-size:112px;margin:8px 0 10px;letter-spacing:-.02em}
+.lead{font-size:30px;max-width:1040px;margin:0 0 22px;line-height:1.3}
+.chips{display:flex;gap:14px;margin-bottom:30px}
+.chip{font-size:24px;font-weight:700;padding:9px 22px;border-radius:999px;border:2px solid var(--blue);background:#fff;color:var(--blue)}
 .chip.g{border-color:var(--green);color:var(--green)}
 .bar{position:absolute;left:0;top:0;width:18px;height:800px;background:var(--blue)}
+.out{display:flex;gap:24px;align-items:stretch}
+.dg{flex:1;padding:18px 26px}
+.dg .t{font-size:22px;font-weight:800;color:var(--blue);margin-bottom:8px}
+.dg .i{font-size:25px;padding:11px 0;border-top:2px solid #e6ebfb;display:flex;gap:12px}
+.dg .i b{color:var(--blue);font-weight:700}
+.al{width:300px;padding:18px 22px;display:flex;flex-direction:column;gap:10px}
+.al .ph{display:flex;gap:10px}
+.al .ph span{flex:1;height:96px;border-radius:10px;background:var(--canvas);border:2px solid var(--line)}
+.al .n{font-size:24px;font-weight:700}
+.al .m{font-size:22px;color:var(--mute)}
 </style>
 <div class="bar"></div>
 <div class="kicker">Uliya Skill for UGREEN AI NAS</div>
 <h1>Fridge Door</h1>
-<p class="lead">School notices and kids' drawings from your phone backup become a weekly to-do list and per-child albums.</p>
-<div class="chips"><span class="chip">Weekly digest</span><span class="chip">Per-child albums</span><span class="chip g">Read on the NAS</span></div>
+<p class="lead">School notices and kids' drawings from your phone backup become a weekly to-do digest, a keepsake folder and album per child, and an art journal on request.</p>
+<div class="chips"><span class="chip">Weekly digest</span><span class="chip">Keepsake folders</span><span class="chip">Art journal</span><span class="chip g">NAS built-in OCR</span></div>
+<div class="out">
+ <div class="card dg"><div class="t">This week's digest</div>
+  <div class="i"><b>&#9744;</b><span>12-04 Field-trip fee KRW 12,000 &middot; Mina</span></div>
+  <div class="i"><b>&#9744;</b><span>12-05 Sign the consent slip &middot; Mina</span></div>
+  <div class="i"><b>&#9744;</b><span>12-08 Pack a jump rope for PE &middot; Jun</span></div></div>
+ <div class="card al"><div class="ph"><span></span><span></span></div><div><div class="n">Artwork - Mina</div><div class="m">2 photos</div></div></div>
+</div>
